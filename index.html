@@ -6,8 +6,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Alpha Earth Krishi | AP Meebhoomi & TS Dharani Cadastral Navigator</title>
-    <meta name="description" content="Includes Andhra Pradesh Meebhoomi 1-B Adangal and Telangana Dharani Portal Cadastral Survey Land Databases integrated with live satellite climate telemetry.">
+    <title>Alpha Earth Krishi | Ultimate Indian GeoAg Platform</title>
+    <meta name="description" content="100% Free Vernacular Agricultural Intelligence Platform with Multi-Language Support (Telugu, Hindi, Marathi, Punjabi, Tamil), Soil Health NPK Calculator, 7-Day Monsoon Forecast, and WhatsApp Advisory Dispatcher.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="index.css?v=1.0.5">
+    <link rel="stylesheet" href="index.css?v=2.0.0">
 </head>
 <body>
     <div class="app-container">
@@ -35,20 +35,33 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">AP Meebhoomi & TS Dharani Land Registry Engine</span>
+                    <span class="brand-subtitle" id="nav-subtitle">Vernacular GeoAg Intelligence Engine</span>
                 </div>
             </div>
             
             <div class="nav-metrics">
+                <!-- Multi-Language Selector Bar -->
+                <div class="lang-selector-container">
+                    <i data-lucide="languages" style="width:14px; height:14px; color:#10b981;"></i>
+                    <select id="select-ui-lang" class="lang-dropdown">
+                        <option value="en">English 🇬🇧</option>
+                        <option value="te" selected>తెలుగు (Telugu) 🇮🇳</option>
+                        <option value="hi">हिंदी (Hindi) 🇮🇳</option>
+                        <option value="mr">मराठी (Marathi) 🇮🇳</option>
+                        <option value="pa">ਪੰਜਾਬੀ (Punjabi) 🇮🇳</option>
+                        <option value="ta">தமிழ் (Tamil) 🇮🇳</option>
+                    </select>
+                </div>
+
                 <!-- Browser Voice Assistant Button -->
                 <button class="voice-assistant-btn" id="btn-voice-ai">
                     <i data-lucide="mic"></i>
-                    <span id="voice-btn-text">Voice Assistant (Speak Telugu/Hindi/Eng)</span>
+                    <span id="voice-btn-text">Voice AI (Telugu / Hindi / Eng)</span>
                 </button>
 
                 <div class="metric-pill">
-                    <i data-lucide="landmark"></i>
-                    <span>AP Meebhoomi & TS Dharani Active</span>
+                    <i data-lucide="zap"></i>
+                    <span>Live Satellite API</span>
                 </div>
                 <div class="status-indicator" id="api-status-pill">
                     <span class="dot"></span> Live API Active
@@ -62,12 +75,12 @@
             <aside class="sidebar">
                 <!-- ALL 766 Districts & Towns Cascading Picker + Live Google Maps Places Search -->
                 <div class="card location-picker-card">
-                    <h3><i data-lucide="map-pin"></i> Live Location & District Navigator</h3>
-                    <p class="card-desc">Selecting any State, District or Town instantly updates the map & recommendations.</p>
+                    <h3><i data-lucide="map-pin"></i> <span id="txt-location-heading">Live Location & District Navigator</span></h3>
+                    <p class="card-desc" id="txt-location-desc">Selecting any State, District or Town instantly updates map & crop advisory.</p>
 
                     <!-- Google Maps / OSM Live Search Input Box -->
                     <div class="input-group" style="position:relative;">
-                        <label><i data-lucide="search" style="width:12px; height:12px; display:inline;"></i> Google Maps / OSM Instant Search</label>
+                        <label><i data-lucide="search" style="width:12px; height:12px; display:inline;"></i> <span id="txt-search-label">Google Maps / OSM Instant Search</span></label>
                         <input type="text" id="input-city-search" placeholder="Search any City, Town, Village or Landmark..." autocomplete="off">
                         <div id="search-suggestions" class="suggestions-box hidden"></div>
                     </div>
@@ -75,32 +88,32 @@
                     <div class="divider-text"><span>OR SELECT DISTRICT FROM 766 LIST</span></div>
 
                     <div class="input-group">
-                        <label>1. State / Union Territory (All 36)</label>
+                        <label id="lbl-state">1. State / Union Territory (All 36)</label>
                         <select id="select-geo-state">
                             <!-- Populated with all 36 States & UTs via JS -->
                         </select>
                     </div>
 
                     <div class="input-group">
-                        <label>2. District / City (All Official 766 Districts)</label>
+                        <label id="lbl-district">2. District / City (All Official 766 Districts)</label>
                         <select id="select-geo-district">
                             <!-- Populated dynamically via JS -->
                         </select>
                     </div>
 
                     <div class="input-group">
-                        <label>3. Town / Taluka / Village (Live Dynamic Resolver)</label>
+                        <label id="lbl-town">3. Town / Taluka / Village (Live Dynamic Resolver)</label>
                         <select id="select-geo-town">
                             <!-- Populated dynamically via JS -->
                         </select>
                     </div>
 
-                    <button class="btn btn-primary" id="btn-fly-location"><i data-lucide="navigation"></i> Fly Map to Selected Location</button>
+                    <button class="btn btn-primary" id="btn-fly-location"><i data-lucide="navigation"></i> <span id="txt-fly-btn">Fly Map to Selected Location</span></button>
                 </div>
 
                 <div class="card search-card">
-                    <h3><i data-lucide="search"></i> AP & TS Cadastral Survey Search</h3>
-                    <p class="card-desc">Query Meebhoomi (AP) & Dharani (TS) Survey Numbers.</p>
+                    <h3><i data-lucide="search"></i> Coordinate & Cadastral Search</h3>
+                    <p class="card-desc">Query Land Survey Numbers, Cadastral Maps or Farmer IDs.</p>
                     
                     <div class="tab-buttons">
                         <button class="tab-btn active" data-tab="coords"><i data-lucide="map-pin"></i> Coordinates</button>
@@ -127,7 +140,7 @@
                         <button class="btn btn-primary" id="btn-analyze-coords"><i data-lucide="refresh-cw"></i> Fetch Live Open-Meteo Data</button>
                     </div>
 
-                    <!-- Tab: Khasra / Survey Number (AP & TS Specific) -->
+                    <!-- Tab: Khasra / Survey Number -->
                     <div class="tab-content" id="tab-survey">
                         <div class="input-group">
                             <label>State Land Registry Portal</label>
@@ -148,7 +161,7 @@
                             <label>Survey Number (Sy.No. / Khasra)</label>
                             <input type="text" id="input-khasra" value="Sy.No. 142/2B">
                         </div>
-                        <button class="btn btn-primary" id="btn-analyze-survey"><i data-lucide="search-check"></i> Query AP/TS Land Parcel Adangal</button>
+                        <button class="btn btn-primary" id="btn-analyze-survey"><i data-lucide="search-check"></i> Query Land Parcel Adangal</button>
                     </div>
 
                     <!-- Tab: Farmer ID Search -->
@@ -185,15 +198,15 @@
 
                     <div class="grid-2col">
                         <div class="info-item">
-                            <span class="info-label"><i data-lucide="droplets"></i> Soil Moisture (0-7cm)</span>
+                            <span class="info-label"><i data-lucide="droplets"></i> <span id="lbl-soil-moist">Soil Moisture (0-7cm)</span></span>
                             <span class="info-val text-accent" id="val-soil-moisture">Fetching...</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label"><i data-lucide="thermometer"></i> Soil Ground Temp</span>
+                            <span class="info-label"><i data-lucide="thermometer"></i> <span id="lbl-soil-temp">Soil Ground Temp</span></span>
                             <span class="info-val" id="val-soil-temp">Fetching...</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label"><i data-lucide="wind"></i> Air Temp / Humidity</span>
+                            <span class="info-label"><i data-lucide="wind"></i> <span id="lbl-air-temp">Air Temp / Humidity</span></span>
                             <span class="info-val" id="val-air-temp">Fetching...</span>
                         </div>
                         <div class="info-item">
@@ -203,15 +216,20 @@
                     </div>
                 </div>
 
-                <!-- AI Agronomist Voice / Text Feedback Box -->
+                <!-- AI Agronomist Vernacular Voice / Text Feedback Box -->
                 <div class="card ai-insight-card">
                     <div class="card-header">
                         <i data-lucide="sparkles" class="icon-sparkle"></i>
-                        <h4>Alpha Earth AI Agronomist Voice Assistant</h4>
+                        <h4 id="lbl-ai-heading">Alpha Earth AI Vernacular Voice Assistant</h4>
                     </div>
                     <div class="ai-recommendation-box" id="ai-summary-text">
-                        Click the mic icon above to ask questions in Telugu, Hindi, or English!
+                        Click mic icon above to ask questions in Telugu, Hindi, Marathi, or English!
                     </div>
+                    
+                    <!-- WhatsApp Advisory Dispatcher Button -->
+                    <button class="btn btn-secondary" style="margin-top:10px; background:rgba(34,197,94,0.15); color:#22c55e; border:1px solid rgba(34,197,94,0.3);" id="btn-send-whatsapp">
+                        <i data-lucide="message-square"></i> Dispatch Crop Advisory to WhatsApp
+                    </button>
                 </div>
             </aside>
 
@@ -250,6 +268,19 @@
                     </div>
                 </div>
 
+                <!-- 7-Day Live Monsoon & Weather Forecast Strip -->
+                <div class="card weather-forecast-card" style="padding:14px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                        <h4 style="font-size:0.95rem; display:flex; align-items:center; gap:6px; color:#fff; margin:0;">
+                            <i data-lucide="sun-cloud" style="color:#06b6d4;"></i> 7-Day Satellite Weather & Monsoon Rain Forecast
+                        </h4>
+                        <span class="badge badge-success">Open-Meteo Real-Time</span>
+                    </div>
+                    <div class="weather-forecast-grid" id="weather-forecast-container" style="display:grid; grid-template-columns: repeat(7, 1fr); gap:8px;">
+                        <!-- Dynamically Populated via JS -->
+                    </div>
+                </div>
+
                 <!-- Super-App Advanced Modules Bar -->
                 <div class="module-tabs-card card">
                     <div class="module-tab-header">
@@ -258,6 +289,8 @@
                     </div>
                     <div class="module-nav-buttons">
                         <button class="mod-btn active" data-mod="disease"><i data-lucide="camera"></i> Plant Disease CV Scanner</button>
+                        <button class="mod-btn" data-mod="soilnpk"><i data-lucide="flask-conical"></i> Soil Health NPK Dosage Calculator</button>
+                        <button class="mod-btn" data-mod="roi"><i data-lucide="calculator"></i> Farm Income & ROI Simulator</button>
                         <button class="mod-btn" data-mod="govland"><i data-lucide="landmark"></i> AP Meebhoomi & TS Dharani</button>
                         <button class="mod-btn" data-mod="irrigation"><i data-lucide="droplet"></i> ET0 Precision Irrigation</button>
                         <button class="mod-btn" data-mod="insurance"><i data-lucide="file-check"></i> PMFBY Satellite Insurance</button>
@@ -277,6 +310,60 @@
                             <div class="diagnosis-result-box" id="diagnosis-result">
                                 <h5><i data-lucide="activity"></i> Disease Scan Diagnosis Result</h5>
                                 <div class="disease-placeholder">Upload a photo above to scan leaf for fungal, bacterial, or pest damage.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module: Soil Health Card & N-P-K Fertilizer Calculator -->
+                    <div class="module-content" id="mod-soilnpk">
+                        <div class="npk-header" style="margin-bottom:12px;">
+                            <h5><i data-lucide="flask-conical"></i> Soil Health Card & Fertilizer N-P-K Bag Calculator</h5>
+                            <p class="text-sub">Calculates exact Urea, DAP, and MOP fertilizer bags per Acre based on topsoil moisture telemetry and crop target.</p>
+                        </div>
+                        <div class="grid-3col" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;">
+                            <div class="npk-card" style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:14px; border-radius:8px; text-align:center;">
+                                <h6 style="color:#10b981; font-size:0.9rem; margin-bottom:4px;">Nitrogen (N) - Urea Requirement</h6>
+                                <div style="font-size:1.6rem; font-weight:800; color:#fff;" id="val-urea-bags">2.4 Bags</div>
+                                <p style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">120 kg Urea / Acre (Split into 3 doses)</p>
+                            </div>
+
+                            <div class="npk-card" style="background:rgba(6,182,212,0.1); border:1px solid rgba(6,182,212,0.3); padding:14px; border-radius:8px; text-align:center;">
+                                <h6 style="color:#06b6d4; font-size:0.9rem; margin-bottom:4px;">Phosphorus (P) - DAP Requirement</h6>
+                                <div style="font-size:1.6rem; font-weight:800; color:#fff;" id="val-dap-bags">1.2 Bags</div>
+                                <p style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">60 kg Di-Ammonium Phosphate / Acre</p>
+                            </div>
+
+                            <div class="npk-card" style="background:rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); padding:14px; border-radius:8px; text-align:center;">
+                                <h6 style="color:#f59e0b; font-size:0.9rem; margin-bottom:4px;">Potassium (K) - MOP Requirement</h6>
+                                <div style="font-size:1.6rem; font-weight:800; color:#fff;" id="val-mop-bags">0.8 Bags</div>
+                                <p style="font-size:0.75rem; color:#94a3b8; margin-top:4px;">40 kg Muriate of Potash / Acre</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module: Farm Financial ROI & Profit Simulator -->
+                    <div class="module-content" id="mod-roi">
+                        <div class="roi-container" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:center;">
+                            <div>
+                                <h5><i data-lucide="calculator"></i> Farm Income & Financial ROI Simulator</h5>
+                                <p class="text-sub">Adjust parcel size slider to calculate expected harvest profit in Rupees (₹).</p>
+                                
+                                <div style="margin-top:14px;">
+                                    <label style="font-size:0.85rem; color:#cbd5e1; display:flex; justify-content:space-between;">
+                                        <span>Farm Parcel Size:</span>
+                                        <strong id="lbl-slider-acres" style="color:#10b981;">3.20 Acres</strong>
+                                    </label>
+                                    <input type="range" id="input-roi-acres" min="0.5" max="25" value="3.2" step="0.5" style="width:100%; margin-top:8px;">
+                                </div>
+                            </div>
+
+                            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.1); padding:16px; border-radius:10px;">
+                                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; font-size:0.85rem;">
+                                    <div><span style="color:#94a3b8;">Expected Yield:</span><br><strong style="font-size:1.1rem; color:#fff;" id="roi-val-yield">89.6 Quintals</strong></div>
+                                    <div><span style="color:#94a3b8;">Est. Gross Income:</span><br><strong style="font-size:1.1rem; color:#10b981;" id="roi-val-revenue">₹6,09,280</strong></div>
+                                    <div><span style="color:#94a3b8;">Total Input Cost:</span><br><strong style="font-size:1.1rem; color:#ef4444;" id="roi-val-cost">₹1,15,200</strong></div>
+                                    <div><span style="color:#94a3b8;">Net Profit per Acre:</span><br><strong style="font-size:1.1rem; color:#f59e0b;" id="roi-val-net">₹1,54,400 / Acre</strong></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -319,13 +406,6 @@
                                     <li><strong>Crop Rights:</strong> Turmeric, Red Gram, Cotton & Paddy Belt</li>
                                 </ul>
                             </div>
-                        </div>
-
-                        <div class="notice-box" style="margin-top:14px; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3);">
-                            <i data-lucide="check-circle"></i>
-                            <span style="font-size:0.8rem; color:#e2e8f0;">
-                                <strong>Live Integration Ready:</strong> Selecting any AP or TS District/Mandal automatically cross-references Bhu-Naksha polygons with Open-Meteo satellite soil telemetry.
-                            </span>
                         </div>
                     </div>
 
@@ -469,6 +549,6 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="app.js?v=1.0.5"></script>
+    <script src="app.js?v=2.0.0"></script>
 </body>
 </html>
