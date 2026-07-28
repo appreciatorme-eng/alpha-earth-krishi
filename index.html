@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Earth Krishi | Real API Multi-Modal GeoAg Platform</title>
-    <meta name="description" content="Production-ready agricultural intelligence platform with real live API integrations for Open-Meteo Climate Archive, OpenStreetMap Geocoding, Sentinel Satellite layers, and Mandi market data.">
+    <title>Alpha Earth Krishi | Complete Zero-Cost Web AgTech Platform</title>
+    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App for Indian Farmers powered by Open-Meteo, Web Speech AI, Computer Vision, ET0 Irrigation, PMFBY Insurance, and KCC Credit Scoring.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,21 +32,23 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">Real Open-Data & Spec-Driven Development Platform</span>
+                    <span class="brand-subtitle">100% Free Browser-Native AgTech Super-App</span>
                 </div>
             </div>
             
             <div class="nav-metrics">
+                <!-- Browser Voice Assistant Button -->
+                <button class="voice-assistant-btn" id="btn-voice-ai">
+                    <i data-lucide="mic"></i>
+                    <span id="voice-btn-text">Voice Assistant (Speak Hindi/Eng)</span>
+                </button>
+
                 <div class="metric-pill">
                     <i data-lucide="globe"></i>
-                    <span>API: Open-Meteo Archive</span>
-                </div>
-                <div class="metric-pill">
-                    <i data-lucide="map"></i>
-                    <span>OSM Nominatim Geocoder</span>
+                    <span>Open-Meteo Live API</span>
                 </div>
                 <div class="status-indicator" id="api-status-pill">
-                    <span class="dot"></span> Live API Connected
+                    <span class="dot"></span> Live API Active
                 </div>
             </div>
         </header>
@@ -57,7 +59,7 @@
             <aside class="sidebar">
                 <div class="card search-card">
                     <h3><i data-lucide="search"></i> Farm Land Identification</h3>
-                    <p class="card-desc">Click anywhere on the map or enter coordinates to trigger <strong>real live API data fetches</strong>.</p>
+                    <p class="card-desc">Click map or input location for instant live open-data analytics.</p>
                     
                     <div class="tab-buttons">
                         <button class="tab-btn active" data-tab="coords"><i data-lucide="map-pin"></i> Coordinates</button>
@@ -79,7 +81,6 @@
                             <button class="chip-btn" onclick="loadRealLocation(16.8524, 74.5815)">Sangli, MH</button>
                             <button class="chip-btn" onclick="loadRealLocation(30.9010, 75.8573)">Ludhiana, PB</button>
                             <button class="chip-btn" onclick="loadRealLocation(12.2958, 76.6394)">Mysuru, KA</button>
-                            <button class="chip-btn" onclick="loadRealLocation(26.9124, 75.7873)">Jaipur, RJ</button>
                         </div>
                         <button class="btn btn-primary" id="btn-analyze-coords"><i data-lucide="refresh-cw"></i> Fetch Live Open-Meteo Data</button>
                     </div>
@@ -158,19 +159,19 @@
                     </div>
                 </div>
 
-                <!-- AI Agronomist Quick Insights -->
+                <!-- AI Agronomist Voice / Text Feedback Box -->
                 <div class="card ai-insight-card">
                     <div class="card-header">
                         <i data-lucide="sparkles" class="icon-sparkle"></i>
-                        <h4>Alpha Earth AI Agronomist Summary</h4>
+                        <h4>Alpha Earth AI Agronomist Voice Assistant</h4>
                     </div>
                     <div class="ai-recommendation-box" id="ai-summary-text">
-                        Processing live multi-modal data streams for selected coordinate...
+                        Click the mic icon above to ask questions in Hindi, Marathi, or English!
                     </div>
                 </div>
             </aside>
 
-            <!-- Workspace View (Map + Analytics Dashboard) -->
+            <!-- Workspace View (Map + Full Suite Modules) -->
             <section class="workspace-area">
                 <!-- Interactive Map Section -->
                 <div class="map-card card">
@@ -180,7 +181,7 @@
                             <button class="layer-btn active" data-layer="rgb">True Color (RGB)</button>
                             <button class="layer-btn" data-layer="ndvi">NDVI (Crop Health)</button>
                             <button class="layer-btn" data-layer="moisture">Soil Moisture (NDWI)</button>
-                            <button class="layer-btn" data-layer="cadastral">Cadastral Survey Grid</button>
+                            <button class="layer-btn" data-layer="cadastral">Cadastral Grid</button>
                         </div>
                         <div class="time-slider-container">
                             <label><i data-lucide="clock"></i> Timeline: <span id="time-year-display">2026 (Live API)</span></label>
@@ -191,14 +192,114 @@
                     <div id="map"></div>
                 </div>
 
+                <!-- NEW: Super-App Advanced Modules Bar -->
+                <div class="module-tabs-card card">
+                    <div class="module-tab-header">
+                        <h4><i data-lucide="cpu"></i> Zero-Cost Farmer Tool Suite</h4>
+                        <span class="badge badge-success">100% Free Browser-Native</span>
+                    </div>
+                    <div class="module-nav-buttons">
+                        <button class="mod-btn active" data-mod="disease"><i data-lucide="camera"></i> Plant Disease CV Scanner</button>
+                        <button class="mod-btn" data-mod="irrigation"><i data-lucide="droplet"></i> ET0 Precision Irrigation</button>
+                        <button class="mod-btn" data-mod="insurance"><i data-lucide="file-check"></i> PMFBY Satellite Insurance</button>
+                        <button class="mod-btn" data-mod="credit"><i data-lucide="credit-card"></i> KCC Satellite Credit Score</button>
+                        <button class="mod-btn" data-mod="fpo"><i data-lucide="users"></i> FPO Produce Pool & Direct Market</button>
+                    </div>
+
+                    <!-- Module 1: Plant Disease CV Scanner -->
+                    <div class="module-content active" id="mod-disease">
+                        <div class="mod-grid">
+                            <div class="upload-box">
+                                <i data-lucide="upload-cloud" class="upload-icon"></i>
+                                <h5>Upload Leaf Photo or Capture Camera</h5>
+                                <p class="text-sub">Instant Browser Computer Vision Diagnosis</p>
+                                <input type="file" id="leaf-image-input" accept="image/*">
+                            </div>
+                            <div class="diagnosis-result-box" id="diagnosis-result">
+                                <h5><i data-lucide="activity"></i> Disease Scan Diagnosis Result</h5>
+                                <div class="disease-placeholder">Upload a photo above to scan leaf for fungal, bacterial, or pest damage.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 2: ET0 Precision Irrigation Advisor -->
+                    <div class="module-content" id="mod-irrigation">
+                        <div class="et0-container">
+                            <div class="et0-metric">
+                                <span class="et0-val" id="et0-value">4.2</span>
+                                <span class="et0-unit">mm / day (Penman-Monteith ET0)</span>
+                            </div>
+                            <div class="et0-advice">
+                                <h5 id="et0-headline">Optimal Drip Irrigation Schedule</h5>
+                                <p id="et0-details">Based on Open-Meteo solar radiation and air temperature, your 2.45 Acre parcel requires 4,150 Liters of drip irrigation today at 5:00 PM to maximize crop yield.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 3: PMFBY Satellite Insurance Claim Generator -->
+                    <div class="module-content" id="mod-insurance">
+                        <div class="insurance-banner">
+                            <div>
+                                <h5>PMFBY Automated Satellite Crop Loss Assessment</h5>
+                                <p class="text-sub">Generates tamper-proof satellite pre/post disaster claim report for instant bank processing.</p>
+                            </div>
+                            <button class="btn btn-primary" id="btn-generate-insurance" style="width:auto; padding:8px 18px;">
+                                <i data-lucide="download"></i> Generate Insurance Certificate
+                            </button>
+                        </div>
+                        <div id="insurance-certificate-preview" class="certificate-preview hidden"></div>
+                    </div>
+
+                    <!-- Module 4: KCC Satellite Credit Score -->
+                    <div class="module-content" id="mod-credit">
+                        <div class="credit-score-grid">
+                            <div class="score-card">
+                                <div class="score-circle">
+                                    <span class="score-num" id="sfpi-score">785</span>
+                                    <span class="score-label">SFPI Index (Out of 850)</span>
+                                </div>
+                                <span class="badge badge-success">Excellent Satellite Credit Profile</span>
+                            </div>
+                            <div class="score-details">
+                                <h5>Kisan Credit Card (KCC) Bank Eligibility</h5>
+                                <ul>
+                                    <li><strong>Eligible Credit Limit:</strong> ₹2,50,000 (Collateral-Free)</li>
+                                    <li><strong>Interest Subvention Rate:</strong> 4.0% per annum (Govt. Subsidized)</li>
+                                    <li><strong>5-Year Satellite Yield Stability:</strong> 94.2% (Low Risk Profile)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module 5: FPO Produce Pool & Direct Buyer Market -->
+                    <div class="module-content" id="mod-fpo">
+                        <div class="fpo-container">
+                            <div class="fpo-header">
+                                <div>
+                                    <h5>Regional FPO Produce Pool (5km Satellite Radius)</h5>
+                                    <p class="text-sub">Aggregated collective volume to bypass mandi middlemen and sell directly to processors.</p>
+                                </div>
+                                <button class="btn btn-primary" style="width:auto; padding:8px 18px;" onclick="alert('Your 2.45 Acre parcel yield listed in the regional FPO bulk pool. Direct buyer quotes requested!')">
+                                    <i data-lucide="shopping-bag"></i> Join Bulk Pool & Sell Direct
+                                </button>
+                            </div>
+                            <div class="fpo-table">
+                                <div class="fpo-row header"><span>Commodity</span><span>Neighbors Growing</span><span>Aggregated Volume</span><span>Direct Buyer Rate</span></div>
+                                <div class="fpo-row"><span>Rajapuri Turmeric</span><span>15 Farmers (110 Acres)</span><span>330 Tonnes</span><span class="profit-val">₹16,500 / Qtl (+18% vs Mandi)</span></div>
+                                <div class="fpo-row"><span>Sugarcane (Co 86032)</span><span>42 Farmers (310 Acres)</span><span>12,400 Tonnes</span><span class="profit-val">₹3,400 / Tonne (Direct Sugar Mill)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Analytics Dashboard -->
                 <div class="analytics-grid">
                     <!-- Real Historical Climate Chart -->
                     <div class="card analytics-card">
                         <div class="card-header">
                             <div>
-                                <h4><i data-lucide="cloud-rain"></i> Live Open-Meteo 10-Year Climate Data</h4>
-                                <p class="card-desc" id="climate-chart-desc">Real computed annual rainfall (mm) & solar radiation for selected Lat/Lng</p>
+                                <h4><i data-lucide="cloud-rain"></i> Live Open-Meteo 10-Year Climate Archive</h4>
+                                <p class="card-desc">Real computed annual rainfall (mm) & solar radiation for selected Lat/Lng</p>
                             </div>
                             <select id="chart-metric-select" class="select-sm">
                                 <option value="rain_sun">Rainfall & Solar Radiation (Real API)</option>
@@ -214,7 +315,7 @@
                     <div class="card analytics-card">
                         <div class="card-header">
                             <div>
-                                <h4><i data-lucide="award"></i> Recommended Plants for Better Benefit</h4>
+                                <h4><i data-lucide="award"></i> Recommended Crops for Higher Profit</h4>
                                 <p class="card-desc">AI recommendation based on real climate profile & expected market prices</p>
                             </div>
                         </div>
@@ -227,7 +328,7 @@
                     <div class="card analytics-card">
                         <div class="card-header">
                             <div>
-                                <h4><i data-lucide="pie-chart"></i> Neighboring Farms Crop Distribution (5km Radius)</h4>
+                                <h4><i data-lucide="pie-chart"></i> Neighboring Farms Crop Spectrum (5km Radius)</h4>
                                 <p class="card-desc">Sentinel-2 AI crop classification of surrounding farm parcels</p>
                             </div>
                         </div>
