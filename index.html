@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Earth Krishi | Dynamic Multi-Modal GeoAg Platform</title>
-    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App for Indian Farmers powered by Open-Meteo, Web Speech AI, Computer Vision, ET0 Irrigation, PMFBY Insurance, and KCC Credit Scoring.">
+    <title>Alpha Earth Krishi | Cascading Location & Hover Land Selector</title>
+    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App for Indian Farmers with State/City/Town Cascading Search and Live Land Hover Selection.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">Dynamic GeoAg Platform for Indian Farmers</span>
+                    <span class="brand-subtitle">Dynamic Land Hover & Location Navigator</span>
                 </div>
             </div>
             
@@ -57,9 +57,47 @@
         <main class="main-layout">
             <!-- Sidebar / Control Panel -->
             <aside class="sidebar">
+                <!-- NEW: Cascading State -> City -> Town Location Picker -->
+                <div class="card location-picker-card">
+                    <h3><i data-lucide="map"></i> Select State, City & Town</h3>
+                    <p class="card-desc">Navigate directly to any state, district, or town in India.</p>
+
+                    <div class="input-group">
+                        <label>1. State</label>
+                        <select id="select-geo-state">
+                            <option value="MH">Maharashtra</option>
+                            <option value="PB">Punjab</option>
+                            <option value="KA">Karnataka</option>
+                            <option value="UP">Uttar Pradesh</option>
+                            <option value="GJ">Gujarat</option>
+                            <option value="WB">West Bengal</option>
+                            <option value="RJ">Rajasthan</option>
+                            <option value="TN">Tamil Nadu</option>
+                            <option value="TS">Telangana</option>
+                            <option value="MP">Madhya Pradesh</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>2. District / City</label>
+                        <select id="select-geo-district">
+                            <!-- Populated dynamically via JS -->
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>3. Town / Village</label>
+                        <select id="select-geo-town">
+                            <!-- Populated dynamically via JS -->
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" id="btn-fly-location"><i data-lucide="navigation"></i> Fly Map to Selected Town</button>
+                </div>
+
                 <div class="card search-card">
-                    <h3><i data-lucide="search"></i> Farm Land Identification</h3>
-                    <p class="card-desc">Click map or input location to dynamically update all regional recommendations & telemetry.</p>
+                    <h3><i data-lucide="search"></i> Coordinate & Parcel Search</h3>
+                    <p class="card-desc">Hover over any land parcel on the map or input precise coordinates.</p>
                     
                     <div class="tab-buttons">
                         <button class="tab-btn active" data-tab="coords"><i data-lucide="map-pin"></i> Coordinates</button>
@@ -77,7 +115,7 @@
                             </div>
                         </div>
                         <div class="preset-locations">
-                            <span class="label-tiny">Quick Real Locations:</span>
+                            <span class="label-tiny">Quick Demos:</span>
                             <button class="chip-btn" onclick="loadRealLocation(16.8524, 74.5815)">Sangli, MH</button>
                             <button class="chip-btn" onclick="loadRealLocation(30.9010, 75.8573)">Ludhiana, PB</button>
                             <button class="chip-btn" onclick="loadRealLocation(12.2958, 76.6394)">Mysuru, KA</button>
@@ -174,7 +212,7 @@
 
             <!-- Workspace View (Map + Full Suite Modules) -->
             <section class="workspace-area">
-                <!-- Interactive Map Section -->
+                <!-- Interactive Map Section with Hover HUD overlay -->
                 <div class="map-card card">
                     <div class="map-toolbar">
                         <div class="layer-selector">
@@ -191,9 +229,21 @@
                     </div>
                     
                     <div id="map"></div>
+
+                    <!-- Floating Hover Land Inspection HUD Overlay -->
+                    <div id="hover-hud" class="hover-hud-box hidden">
+                        <div class="hud-header">
+                            <span class="hud-dot"></span>
+                            <span class="hud-title" id="hud-latlng">Hovering Land: 16.8524 N, 74.5815 E</span>
+                        </div>
+                        <div class="hud-body">
+                            <span><i data-lucide="scan"></i> Land Parcel Preview</span>
+                            <span class="hud-action">Click Map to Lock & Analyze</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- NEW: Super-App Advanced Modules Bar -->
+                <!-- Super-App Advanced Modules Bar -->
                 <div class="module-tabs-card card">
                     <div class="module-tab-header">
                         <h4><i data-lucide="cpu"></i> Zero-Cost Farmer Tool Suite</h4>

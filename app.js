@@ -1,15 +1,172 @@
-// Alpha Earth Krishi Fully Dynamic Multi-Modal GeoAg Platform
+// Alpha Earth Krishi Cascading Location & Land Hover Engine
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
+
+    // Cascading State -> District -> Town Database with Exact Lat/Lng Coordinates
+    const geoDatabase = {
+        "MH": {
+            name: "Maharashtra",
+            districts: {
+                "sangli": {
+                    name: "Sangli",
+                    towns: {
+                        "miraj": { name: "Miraj / Nishant Colony", lat: 16.8524, lng: 74.5815 },
+                        "walwa": { name: "Walwa / Islampur", lat: 17.0512, lng: 74.2654 },
+                        "tasgaon": { name: "Tasgaon Vineyards", lat: 17.0341, lng: 74.6012 }
+                    }
+                },
+                "pune": {
+                    name: "Pune",
+                    towns: {
+                        "baramati": { name: "Baramati Agri Hub", lat: 18.1512, lng: 74.5784 },
+                        "haveli": { name: "Haveli / Hadapsar", lat: 18.4984, lng: 73.9452 },
+                        "shirur": { name: "Shirur Industrial Farm", lat: 18.8284, lng: 74.3752 }
+                    }
+                },
+                "nashik": {
+                    name: "Nashik",
+                    towns: {
+                        "niphad": { name: "Niphad Grape Valley", lat: 20.0784, lng: 74.1084 },
+                        "malegaon": { name: "Malegaon Basin", lat: 20.5512, lng: 74.5284 }
+                    }
+                }
+            }
+        },
+        "PB": {
+            name: "Punjab",
+            districts: {
+                "ludhiana": {
+                    name: "Ludhiana",
+                    towns: {
+                        "jagraon": { name: "Jagraon Wheat Belt", lat: 30.9010, lng: 75.8573 },
+                        "khanna": { name: "Khanna Grain Market", lat: 30.7012, lng: 76.2184 },
+                        "samrala": { name: "Samrala Paddy Belt", lat: 30.8384, lng: 76.1912 }
+                    }
+                },
+                "amritsar": {
+                    name: "Amritsar",
+                    towns: {
+                        "ajnala": { name: "Ajnala Border Farm", lat: 31.8384, lng: 74.7584 },
+                        "bakala": { name: "Baba Bakala Farm", lat: 31.5512, lng: 75.2584 }
+                    }
+                }
+            }
+        },
+        "KA": {
+            name: "Karnataka",
+            districts: {
+                "mysuru": {
+                    name: "Mysuru",
+                    towns: {
+                        "nanjangud": { name: "Nanjangud Banana Belt", lat: 12.2958, lng: 76.6394 },
+                        "hunsur": { name: "Hunsur Tobacco Farm", lat: 12.3084, lng: 76.2884 }
+                    }
+                },
+                "belagavi": {
+                    name: "Belagavi",
+                    towns: {
+                        "chikodi": { name: "Chikodi Sugarcane Belt", lat: 16.4284, lng: 74.5984 },
+                        "gokak": { name: "Gokak Basin", lat: 16.1684, lng: 74.8284 }
+                    }
+                }
+            }
+        },
+        "UP": {
+            name: "Uttar Pradesh",
+            districts: {
+                "varanasi": {
+                    name: "Varanasi",
+                    towns: {
+                        "pindra": { name: "Pindra Agri Belt", lat: 25.4884, lng: 82.8584 },
+                        "sevapuri": { name: "Sevapuri Farm", lat: 25.3284, lng: 82.7884 }
+                    }
+                },
+                "lucknow": {
+                    name: "Lucknow",
+                    towns: {
+                        "malihabad": { name: "Malihabad Mango Orchards", lat: 26.9184, lng: 80.7184 }
+                    }
+                }
+            }
+        },
+        "WB": {
+            name: "West Bengal",
+            districts: {
+                "kolkata": {
+                    name: "North 24 Parganas",
+                    towns: {
+                        "barasat": { name: "Barasat Jute Belt", lat: 22.5726, lng: 88.3639 },
+                        "basirhat": { name: "Basirhat Paddy Farm", lat: 22.6584, lng: 88.8884 }
+                    }
+                }
+            }
+        },
+        "GJ": {
+            name: "Gujarat",
+            districts: {
+                "anand": {
+                    name: "Anand",
+                    towns: {
+                        "petlad": { name: "Petlad Tobacco/Cotton", lat: 22.4784, lng: 72.8084 }
+                    }
+                }
+            }
+        },
+        "RJ": {
+            name: "Rajasthan",
+            districts: {
+                "jaipur": {
+                    name: "Jaipur",
+                    towns: {
+                        "chomu": { name: "Chomu Organic Belt", lat: 26.9124, lng: 75.7873 }
+                    }
+                }
+            }
+        },
+        "TN": {
+            name: "Tamil Nadu",
+            districts: {
+                "coimbatore": {
+                    name: "Coimbatore",
+                    towns: {
+                        "pollachi": { name: "Pollachi Coconut Groves", lat: 10.6584, lng: 77.0084 }
+                    }
+                }
+            }
+        },
+        "TS": {
+            name: "Telangana",
+            districts: {
+                "warangal": {
+                    name: "Warangal",
+                    towns: {
+                        "jangaon": { name: "Jangaon Chilli/Cotton", lat: 17.7284, lng: 79.1784 }
+                    }
+                }
+            }
+        },
+        "MP": {
+            name: "Madhya Pradesh",
+            districts: {
+                "indore": {
+                    name: "Indore",
+                    towns: {
+                        "sanwer": { name: "Sanwer Soybean Belt", lat: 22.9784, lng: 75.8284 }
+                    }
+                }
+            }
+        }
+    };
 
     const state = {
         lat: 16.8524,
         lng: 74.5815,
-        locationName: "Loading location...",
+        locationName: "Sangli, Maharashtra",
         region: "west",
         year: 2026,
         layer: 'rgb',
         polygon: null,
+        hoverPolygon: null,
         marker: null,
         charts: {},
         realData: {
@@ -24,11 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Initialize Map
+    // Initialize Leaflet Map
     const map = L.map('map', { zoomControl: true, scrollWheelZoom: true }).setView([state.lat, state.lng], 15);
 
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Esri, Maxar, CNES/Airbus DS, OpenStreetMap contributors',
+        attribution: 'Esri, Maxar, CNES/Airbus, OpenStreetMap contributors',
         maxZoom: 19
     }).addTo(map);
 
@@ -61,19 +218,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
     drawParcelPolygon(state.lat, state.lng);
 
+    // Hover HUD & Hover Land Inspection Polygon
+    const hoverHud = document.getElementById('hover-hud');
+    const hudLatLng = document.getElementById('hud-latlng');
+
+    map.on('mousemove', (e) => {
+        const hLat = e.latlng.lat;
+        const hLng = e.latlng.lng;
+
+        hudLatLng.innerText = `Hovering Land: ${hLat.toFixed(4)} N, ${hLng.toFixed(4)} E`;
+        hoverHud.classList.remove('hidden');
+
+        // Draw temporary hover polygon around cursor land parcel
+        if (state.hoverPolygon) map.removeLayer(state.hoverPolygon);
+
+        const d = 0.0018;
+        const hoverCoords = [
+            [hLat + d, hLng - d],
+            [hLat + d * 1.2, hLng + d],
+            [hLat - d, hLng + d * 0.8],
+            [hLat - d * 0.8, hLng - d * 0.9]
+        ];
+
+        state.hoverPolygon = L.polygon(hoverCoords, {
+            color: '#06b6d4',
+            fillColor: '#06b6d4',
+            fillOpacity: 0.2,
+            weight: 2,
+            dashArray: '3, 3'
+        }).addTo(map);
+    });
+
+    map.on('mouseout', () => {
+        hoverHud.classList.add('hidden');
+        if (state.hoverPolygon) map.removeLayer(state.hoverPolygon);
+    });
+
     map.on('click', (e) => {
         window.loadRealLocation(e.latlng.lat, e.latlng.lng);
     });
 
-    // Regional Agronomic Classifier based on Latitude/Longitude
-    function detectAgroRegion(lat, lng) {
-        if (lat > 25.0) return "north";         // Punjab, Haryana, UP, Rajasthan, HP
-        if (lng > 80.0) return "east";          // West Bengal, Bihar, Odisha, Assam
-        if (lat < 15.0) return "south";         // Karnataka, AP, Telangana, TN, Kerala
-        return "west";                          // Maharashtra, Gujarat, MP (Deccan)
+    // Populate Cascading Dropdowns (State -> District -> Town)
+    const stateSelect = document.getElementById('select-geo-state');
+    const districtSelect = document.getElementById('select-geo-district');
+    const townSelect = document.getElementById('select-geo-town');
+
+    function updateDistrictDropdown() {
+        const stateKey = stateSelect.value;
+        const districts = geoDatabase[stateKey] ? geoDatabase[stateKey].districts : {};
+
+        districtSelect.innerHTML = Object.keys(districts).map(dKey => 
+            `<option value="${dKey}">${districts[dKey].name}</option>`
+        ).join('');
+
+        updateTownDropdown();
     }
 
-    // 1. Browser Web Speech Assistant
+    function updateTownDropdown() {
+        const stateKey = stateSelect.value;
+        const districtKey = districtSelect.value;
+        const districtObj = (geoDatabase[stateKey] && geoDatabase[stateKey].districts[districtKey]) || {};
+        const towns = districtObj.towns || {};
+
+        townSelect.innerHTML = Object.keys(towns).map(tKey => 
+            `<option value="${tKey}">${towns[tKey].name}</option>`
+        ).join('');
+    }
+
+    stateSelect.addEventListener('change', updateDistrictDropdown);
+    districtSelect.addEventListener('change', updateTownDropdown);
+
+    // Initial populate
+    updateDistrictDropdown();
+
+    // Fly Map to Selected Location Button Handler
+    document.getElementById('btn-fly-location').addEventListener('click', () => {
+        const stateKey = stateSelect.value;
+        const districtKey = districtSelect.value;
+        const townKey = townSelect.value;
+
+        const townObj = geoDatabase[stateKey]?.districts[districtKey]?.towns[townKey];
+        if (townObj) {
+            map.flyTo([townObj.lat, townObj.lng], 16, { duration: 1.5 });
+            window.loadRealLocation(townObj.lat, townObj.lng);
+        }
+    });
+
+    // Agro-Region Classifier
+    function detectAgroRegion(lat, lng) {
+        if (lat > 25.0) return "north";
+        if (lng > 80.0) return "east";
+        if (lat < 15.0) return "south";
+        return "west";
+    }
+
+    // Voice Assistant
     const voiceBtn = document.getElementById('btn-voice-ai');
     const voiceBtnText = document.getElementById('voice-btn-text');
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -121,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // 2. Real Nominatim Reverse Geocoding
+    // Real Open-Meteo Reverse Geocoding
     async function fetchReverseGeocode(lat, lng) {
         try {
             const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
@@ -141,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 3. Real Open-Meteo Historical Climate Archive
+    // Real Open-Meteo Climate Archive
     async function fetchRealClimateData(lat, lng) {
         const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lng}&start_date=2017-01-01&end_date=2025-12-31&daily=precipitation_sum,shortwave_radiation_sum,temperature_2m_max&timezone=Asia%2FKolkata`;
         try {
@@ -190,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 4. Real Open-Meteo Soil Forecast Telemetry
+    // Real Open-Meteo Soil Forecast Telemetry
     async function fetchRealSoilTelemetry(lat, lng) {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,soil_temperature_0cm,soil_moisture_0_to_7cm`;
         try {
@@ -213,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 5. ET0 Hargreaves Evapotranspiration Calculator
+    // ET0 Evapotranspiration Calculator
     function calculateET0(solarRadiation, maxTemp) {
         const et0 = +(0.0023 * (solarRadiation * 2.0) * (maxTemp + 17.8) * 0.18).toFixed(1);
         document.getElementById('et0-value').innerText = et0;
@@ -221,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('et0-details').innerText = `Based on Open-Meteo solar radiation (${solarRadiation} MJ/m²/day) and air temp (${maxTemp}°C), your 2.45 Acre parcel requires ${totalLiters.toLocaleString()} Liters of drip irrigation today at 5:00 PM.`;
     }
 
-    // 6. KCC Credit Score Generator
+    // KCC Credit Score
     function calculateKCCScore(rainfallArr) {
         const mean = rainfallArr.reduce((a,b)=>a+b,0) / rainfallArr.length;
         const variance = rainfallArr.reduce((a,b)=>a+Math.pow(b-mean,2),0) / rainfallArr.length;
@@ -233,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('val-stability-pct').innerText = (100 - (cv * 100)).toFixed(1) + "%";
     }
 
-    // Dynamic AI Summary Update
+    // Dynamic AI Summary
     function updateAISummary(locationName, rainfall, solar, region) {
         const latestRain = rainfall[rainfall.length - 2] || 850;
         const avgSolar = solar[solar.length - 2] || 19.0;
@@ -248,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Dynamic Crop Recommendation Engine (Location-Specific!)
+    // Dynamic Crop Recommendations
     function renderCropRecommendations(region, lat, lng) {
         const listEl = document.getElementById('recommended-crops-list');
         let crops = [];
@@ -272,7 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Yellow Mustard / Oilseed", icon: "🌾", tags: ["Rabi Crop", "Short Duration"], profit: "₹59,000 / Acre", score: "89% Fit" }
             ];
         } else {
-            // Deccan / West Region
             crops = [
                 { name: "Turmeric (Rajapuri Curcumin 5.2%)", icon: "🌿", tags: ["High ROI", "Pharma Demand"], profit: "₹1,60,000 / Acre", score: "97% Fit" },
                 { name: "Pomegranate (Bhagwa Hybrid)", icon: "🍎", tags: ["Export Grade", "Drip Adapted"], profit: "₹1,95,000 / Acre", score: "94% Fit" },
@@ -299,7 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Dynamic Neighbor Crop Spectrum Chart (Sentinel-2 Classification by Region)
+    // Dynamic Neighbor Crop Spectrum
     function renderNeighborChart(region) {
         const ctx = document.getElementById('neighborChart').getContext('2d');
         if (state.charts.neighbor) state.charts.neighbor.destroy();
@@ -349,22 +587,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         state.charts.neighbor = new Chart(ctx, {
             type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{ data: data, backgroundColor: colors, borderWidth: 0 }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                cutout: '70%'
-            }
+            data: { labels: labels, datasets: [{ data: data, backgroundColor: colors, borderWidth: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '70%' }
         });
 
         document.getElementById('neighbor-insights-list').innerHTML = htmlList;
     }
 
-    // Dynamic Mandi Price Forecast Chart by Region
+    // Dynamic Mandi Price Forecast Chart
     function renderPriceForecastChart(region) {
         const ctx = document.getElementById('priceForecastChart').getContext('2d');
         if (state.charts.price) state.charts.price.destroy();
@@ -393,19 +623,11 @@ document.addEventListener('DOMContentLoaded', () => {
         state.charts.price = new Chart(ctx, {
             type: 'line',
             data: { labels: months, datasets: [dataset1, dataset2] },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
-                scales: {
-                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } } } }
         });
     }
 
-    // Dynamic FPO Produce Pool Table Renderer
+    // Dynamic FPO Produce Pool Table
     function renderFPOProducePool(region) {
         const bodyEl = document.getElementById('fpo-table-body');
         let html = '';
@@ -435,7 +657,37 @@ document.addEventListener('DOMContentLoaded', () => {
         bodyEl.innerHTML = html;
     }
 
-    // Master Location Load Orchestrator (EVERYTHING DYNAMIC!)
+    // Climate Chart Renderer
+    function renderClimateChart(metric = 'rain_sun') {
+        const ctx = document.getElementById('climateChart').getContext('2d');
+        if (state.charts.climate) state.charts.climate.destroy();
+
+        const years = state.realData.years.length ? state.realData.years : ['2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
+        let datasets = [];
+
+        if (metric === 'rain_sun') {
+            datasets = [
+                { label: 'Annual Real Rainfall (mm)', data: state.realData.rainfall, borderColor: '#06b6d4', backgroundColor: 'rgba(6, 182, 212, 0.15)', yAxisID: 'yRain', tension: 0.3, fill: true },
+                { label: 'Solar Radiance (MJ/m²/day)', data: state.realData.solar, borderColor: '#f59e0b', yAxisID: 'ySun', tension: 0.3, borderDash: [4, 4] }
+            ];
+        } else {
+            datasets = [
+                { label: 'Peak Air Temperature (°C)', data: state.realData.maxTemp, borderColor: '#ef4444', backgroundColor: 'rgba(239, 68, 68, 0.15)', yAxisID: 'yTemp', tension: 0.3, fill: true }
+            ];
+        }
+
+        state.charts.climate = new Chart(ctx, {
+            type: 'line',
+            data: { labels: years, datasets: datasets },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }, yRain: { type: 'linear', position: 'left', ticks: { color: '#06b6d4' } }, ySun: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, ticks: { color: '#f59e0b' } }, yTemp: { type: 'linear', position: 'left', ticks: { color: '#ef4444' } } } }
+        });
+    }
+
+    document.getElementById('chart-metric-select').addEventListener('change', (e) => {
+        renderClimateChart(e.target.value);
+    });
+
+    // Master Location Orchestrator
     window.loadRealLocation = async function(lat, lng) {
         state.lat = lat;
         state.lng = lng;

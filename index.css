@@ -79,10 +79,7 @@ body {
     box-shadow: 0 0 20px var(--accent-emerald-glow);
 }
 
-.logo-icon svg {
-    width: 26px;
-    height: 26px;
-}
+.logo-icon svg { width: 26px; height: 26px; }
 
 .brand-title {
     font-family: var(--font-heading);
@@ -102,19 +99,10 @@ body {
     margin-left: 4px;
 }
 
-.brand-subtitle {
-    display: block;
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-}
+.brand-subtitle { display: block; font-size: 0.78rem; color: var(--text-secondary); }
 
-.nav-metrics {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
+.nav-metrics { display: flex; align-items: center; gap: 14px; }
 
-/* Voice Assistant Button */
 .voice-assistant-btn {
     background: linear-gradient(135deg, #8b5cf6, #6366f1);
     color: #fff;
@@ -208,11 +196,7 @@ body {
     margin-bottom: 14px;
 }
 
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
+.sidebar { display: flex; flex-direction: column; gap: 18px; }
 
 .tab-buttons {
     display: flex;
@@ -239,11 +223,7 @@ body {
     gap: 6px;
 }
 
-.tab-btn.active {
-    background: var(--bg-card);
-    color: var(--accent-emerald);
-}
-
+.tab-btn.active { background: var(--bg-card); color: var(--accent-emerald); }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
@@ -256,11 +236,7 @@ body {
     margin-bottom: 6px;
 }
 
-.dual-input {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-}
+.dual-input { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
 input[type="text"], select {
     width: 100%;
@@ -308,10 +284,7 @@ input[type="text"], select {
     gap: 8px;
 }
 
-.btn-primary {
-    background: linear-gradient(135deg, var(--accent-emerald), #059669);
-    color: #fff;
-}
+.btn-primary { background: linear-gradient(135deg, var(--accent-emerald), #059669); color: #fff; }
 
 .notice-box {
     background: rgba(245, 158, 11, 0.1);
@@ -334,20 +307,8 @@ input[type="text"], select {
     margin-bottom: 12px;
 }
 
-.badge {
-    display: inline-block;
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    margin-bottom: 6px;
-}
-
-.badge-success {
-    background: rgba(16, 185, 129, 0.15);
-    color: var(--accent-emerald);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-}
+.badge { display: inline-block; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; margin-bottom: 6px; }
+.badge-success { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.3); }
 
 .text-sub { font-size: 0.78rem; color: var(--text-secondary); }
 
@@ -359,14 +320,7 @@ input[type="text"], select {
     border: 1px solid var(--border-color);
 }
 
-.area-val {
-    font-family: var(--font-heading);
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--accent-cyan);
-    display: block;
-}
-
+.area-val { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--accent-cyan); display: block; }
 .area-unit { font-size: 0.7rem; color: var(--text-muted); }
 
 .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -388,11 +342,12 @@ input[type="text"], select {
 
 .workspace-area { display: flex; flex-direction: column; gap: 20px; }
 
+/* Map Card & Hover Land HUD */
 .map-card {
     position: relative;
     padding: 0;
     overflow: hidden;
-    height: 440px;
+    height: 460px;
     display: flex;
     flex-direction: column;
 }
@@ -427,9 +382,42 @@ input[type="text"], select {
 
 .time-slider-container { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; color: var(--text-secondary); }
 
-#map { flex: 1; width: 100%; background-color: #0d1322; }
+#map { flex: 1; width: 100%; background-color: #0d1322; cursor: crosshair; }
 
-/* NEW Super-App Module Tab Card */
+/* NEW Floating Land Hover HUD Overlay */
+.hover-hud-box {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: rgba(18, 25, 44, 0.92);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--accent-emerald);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(16, 185, 129, 0.3);
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.hover-hud-box.hidden { opacity: 0; pointer-events: none; }
+
+.hud-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.hud-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-cyan);
+    animation: pulse 1s infinite;
+}
+
+.hud-title { font-family: var(--font-heading); font-size: 0.82rem; font-weight: 700; color: #fff; }
+.hud-body { display: flex; justify-content: space-between; gap: 14px; font-size: 0.75rem; color: var(--text-secondary); }
+.hud-body svg { width: 12px; height: 12px; vertical-align: middle; color: var(--accent-emerald); }
+.hud-action { color: var(--accent-emerald); font-weight: 600; }
+
+/* Module Tabs */
 .module-tabs-card { display: flex; flex-direction: column; gap: 14px; }
 .module-tab-header { display: flex; justify-content: space-between; align-items: center; }
 
@@ -455,19 +443,13 @@ input[type="text"], select {
     align-items: center;
     gap: 6px;
     white-space: nowrap;
-    transition: all 0.2s;
 }
 
-.mod-btn.active {
-    background: var(--bg-card);
-    color: var(--accent-cyan);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-}
+.mod-btn.active { background: var(--bg-card); color: var(--accent-cyan); }
 
 .module-content { display: none; background: var(--bg-secondary); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); }
 .module-content.active { display: block; }
 
-/* Module 1: Plant CV */
 .mod-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: center; }
 .upload-box {
     border: 2px dashed var(--border-color);
@@ -475,22 +457,18 @@ input[type="text"], select {
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    transition: border-color 0.2s;
     position: relative;
 }
 
-.upload-box:hover { border-color: var(--accent-cyan); }
 .upload-icon { width: 36px; height: 36px; color: var(--accent-cyan); margin-bottom: 8px; }
 .upload-box input[type="file"] { position: absolute; top:0; left:0; width:100%; height:100%; opacity: 0; cursor: pointer; }
 .diagnosis-result-box { background: var(--bg-card); padding: 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); min-height: 110px; }
 
-/* Module 2: ET0 Irrigation */
 .et0-container { display: flex; align-items: center; gap: 24px; }
 .et0-metric { text-align: center; background: var(--bg-card); padding: 14px 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); }
 .et0-val { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: var(--accent-cyan); display: block; line-height: 1; }
 .et0-unit { font-size: 0.72rem; color: var(--text-muted); }
 
-/* Module 3: Insurance Certificate */
 .insurance-banner { display: flex; justify-content: space-between; align-items: center; }
 .certificate-preview {
     margin-top: 14px;
@@ -499,25 +477,21 @@ input[type="text"], select {
     padding: 18px;
     border-radius: var(--radius-sm);
     font-family: 'Outfit', sans-serif;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 .certificate-preview.hidden { display: none; }
 
-/* Module 4: KCC Credit Score */
 .credit-score-grid { display: grid; grid-template-columns: 200px 1fr; gap: 20px; align-items: center; }
 .score-card { text-align: center; background: var(--bg-card); padding: 16px; border-radius: var(--radius-sm); }
 .score-num { font-family: var(--font-heading); font-size: 2.5rem; font-weight: 800; color: var(--accent-emerald); display: block; }
 .score-label { font-size: 0.75rem; color: var(--text-secondary); display: block; margin-bottom: 8px; }
 .score-details ul { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; }
 
-/* Module 5: FPO Table */
 .fpo-container { display: flex; flex-direction: column; gap: 14px; }
 .fpo-header { display: flex; justify-content: space-between; align-items: center; }
 .fpo-table { display: flex; flex-direction: column; gap: 6px; }
 .fpo-row { display: grid; grid-template-columns: 1.5fr 1.5fr 1.2fr 2fr; padding: 8px 12px; background: var(--bg-card); border-radius: 6px; font-size: 0.82rem; }
 .fpo-row.header { font-weight: 700; color: var(--text-secondary); background: transparent; border-bottom: 1px solid var(--border-color); }
 
-/* Analytics Grid */
 .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .analytics-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
 .select-sm { width: auto; font-size: 0.76rem; padding: 4px 8px; background: var(--bg-secondary); }
