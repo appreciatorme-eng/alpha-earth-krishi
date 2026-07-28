@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Earth Krishi | Cascading Location & Hover Land Selector</title>
-    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App for Indian Farmers with State/City/Town Cascading Search and Live Land Hover Selection.">
+    <title>Alpha Earth Krishi | All 36 Indian States & UTs Navigator</title>
+    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App covering all 28 States and 8 Union Territories of India with Live City Search and Land Hover Inspection.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">Dynamic Land Hover & Location Navigator</span>
+                    <span class="brand-subtitle">All 36 States & UTs GeoAg Navigator</span>
                 </div>
             </div>
             
@@ -57,24 +57,24 @@
         <main class="main-layout">
             <!-- Sidebar / Control Panel -->
             <aside class="sidebar">
-                <!-- NEW: Cascading State -> City -> Town Location Picker -->
+                <!-- ALL 36 States & UTs Cascading Picker + Instant Live Search -->
                 <div class="card location-picker-card">
-                    <h3><i data-lucide="map"></i> Select State, City & Town</h3>
-                    <p class="card-desc">Navigate directly to any state, district, or town in India.</p>
+                    <h3><i data-lucide="map"></i> Select Any State, City & Town</h3>
+                    <p class="card-desc">Covers all 28 States & 8 Union Territories of India.</p>
+
+                    <!-- Instant Live City Search Box -->
+                    <div class="input-group" style="position:relative;">
+                        <label><i data-lucide="search" style="width:12px; height:12px; display:inline;"></i> Instant City / Village Search</label>
+                        <input type="text" id="input-city-search" placeholder="Type any City, Town or Village (e.g. Nagpur, Guntur)..." autocomplete="off">
+                        <div id="search-suggestions" class="suggestions-box hidden"></div>
+                    </div>
+
+                    <div class="divider-text"><span>OR SELECT FROM LIST</span></div>
 
                     <div class="input-group">
-                        <label>1. State</label>
+                        <label>1. State / Union Territory (All 36)</label>
                         <select id="select-geo-state">
-                            <option value="MH">Maharashtra</option>
-                            <option value="PB">Punjab</option>
-                            <option value="KA">Karnataka</option>
-                            <option value="UP">Uttar Pradesh</option>
-                            <option value="GJ">Gujarat</option>
-                            <option value="WB">West Bengal</option>
-                            <option value="RJ">Rajasthan</option>
-                            <option value="TN">Tamil Nadu</option>
-                            <option value="TS">Telangana</option>
-                            <option value="MP">Madhya Pradesh</option>
+                            <!-- Populated with all 36 States & UTs via JS -->
                         </select>
                     </div>
 
@@ -92,7 +92,7 @@
                         </select>
                     </div>
 
-                    <button class="btn btn-primary" id="btn-fly-location"><i data-lucide="navigation"></i> Fly Map to Selected Town</button>
+                    <button class="btn btn-primary" id="btn-fly-location"><i data-lucide="navigation"></i> Fly Map to Selected Location</button>
                 </div>
 
                 <div class="card search-card">

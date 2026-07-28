@@ -1,161 +1,212 @@
-// Alpha Earth Krishi Cascading Location & Land Hover Engine
+// Alpha Earth Krishi All 36 States & UTs Database Engine
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
-    // Cascading State -> District -> Town Database with Exact Lat/Lng Coordinates
+    // Complete Database of ALL 28 States & 8 Union Territories in India
     const geoDatabase = {
-        "MH": {
-            name: "Maharashtra",
+        "AP": {
+            name: "Andhra Pradesh",
             districts: {
-                "sangli": {
-                    name: "Sangli",
-                    towns: {
-                        "miraj": { name: "Miraj / Nishant Colony", lat: 16.8524, lng: 74.5815 },
-                        "walwa": { name: "Walwa / Islampur", lat: 17.0512, lng: 74.2654 },
-                        "tasgaon": { name: "Tasgaon Vineyards", lat: 17.0341, lng: 74.6012 }
-                    }
-                },
-                "pune": {
-                    name: "Pune",
-                    towns: {
-                        "baramati": { name: "Baramati Agri Hub", lat: 18.1512, lng: 74.5784 },
-                        "haveli": { name: "Haveli / Hadapsar", lat: 18.4984, lng: 73.9452 },
-                        "shirur": { name: "Shirur Industrial Farm", lat: 18.8284, lng: 74.3752 }
-                    }
-                },
-                "nashik": {
-                    name: "Nashik",
-                    towns: {
-                        "niphad": { name: "Niphad Grape Valley", lat: 20.0784, lng: 74.1084 },
-                        "malegaon": { name: "Malegaon Basin", lat: 20.5512, lng: 74.5284 }
-                    }
-                }
+                "guntur": { name: "Guntur", towns: { "tenali": { name: "Tenali Chilli/Paddy", lat: 16.243, lng: 80.640 } } },
+                "anantapur": { name: "Anantapur", towns: { "dharmavaram": { name: "Dharmavaram Groundnut", lat: 14.414, lng: 77.719 } } },
+                "kurnool": { name: "Kurnool", towns: { "nandyal": { name: "Nandyal Cotton", lat: 15.478, lng: 78.483 } } }
             }
         },
-        "PB": {
-            name: "Punjab",
+        "AR": {
+            name: "Arunachal Pradesh",
             districts: {
-                "ludhiana": {
-                    name: "Ludhiana",
-                    towns: {
-                        "jagraon": { name: "Jagraon Wheat Belt", lat: 30.9010, lng: 75.8573 },
-                        "khanna": { name: "Khanna Grain Market", lat: 30.7012, lng: 76.2184 },
-                        "samrala": { name: "Samrala Paddy Belt", lat: 30.8384, lng: 76.1912 }
-                    }
-                },
-                "amritsar": {
-                    name: "Amritsar",
-                    towns: {
-                        "ajnala": { name: "Ajnala Border Farm", lat: 31.8384, lng: 74.7584 },
-                        "bakala": { name: "Baba Bakala Farm", lat: 31.5512, lng: 75.2584 }
-                    }
-                }
+                "itanagar": { name: "Papum Pare", towns: { "itanagar": { name: "Itanagar Horticulture", lat: 27.084, lng: 93.605 } } }
             }
         },
-        "KA": {
-            name: "Karnataka",
+        "AS": {
+            name: "Assam",
             districts: {
-                "mysuru": {
-                    name: "Mysuru",
-                    towns: {
-                        "nanjangud": { name: "Nanjangud Banana Belt", lat: 12.2958, lng: 76.6394 },
-                        "hunsur": { name: "Hunsur Tobacco Farm", lat: 12.3084, lng: 76.2884 }
-                    }
-                },
-                "belagavi": {
-                    name: "Belagavi",
-                    towns: {
-                        "chikodi": { name: "Chikodi Sugarcane Belt", lat: 16.4284, lng: 74.5984 },
-                        "gokak": { name: "Gokak Basin", lat: 16.1684, lng: 74.8284 }
-                    }
-                }
+                "dibrugarh": { name: "Dibrugarh", towns: { "chabua": { name: "Chabua Tea Gardens", lat: 27.488, lng: 95.178 } } },
+                "kamrup": { name: "Kamrup", towns: { "guwahati": { name: "Guwahati Valley", lat: 26.144, lng: 91.736 } } }
             }
         },
-        "UP": {
-            name: "Uttar Pradesh",
+        "BR": {
+            name: "Bihar",
             districts: {
-                "varanasi": {
-                    name: "Varanasi",
-                    towns: {
-                        "pindra": { name: "Pindra Agri Belt", lat: 25.4884, lng: 82.8584 },
-                        "sevapuri": { name: "Sevapuri Farm", lat: 25.3284, lng: 82.7884 }
-                    }
-                },
-                "lucknow": {
-                    name: "Lucknow",
-                    towns: {
-                        "malihabad": { name: "Malihabad Mango Orchards", lat: 26.9184, lng: 80.7184 }
-                    }
-                }
+                "muzaffarpur": { name: "Muzaffarpur", towns: { "kanti": { name: "Kanti Litchi Belt", lat: 26.120, lng: 85.390 } } },
+                "patna": { name: "Patna", towns: { "bihta": { name: "Bihta Vegetable Belt", lat: 25.560, lng: 84.870 } } }
             }
         },
-        "WB": {
-            name: "West Bengal",
+        "CG": {
+            name: "Chhattisgarh",
             districts: {
-                "kolkata": {
-                    name: "North 24 Parganas",
-                    towns: {
-                        "barasat": { name: "Barasat Jute Belt", lat: 22.5726, lng: 88.3639 },
-                        "basirhat": { name: "Basirhat Paddy Farm", lat: 22.6584, lng: 88.8884 }
-                    }
-                }
+                "raipur": { name: "Raipur", towns: { "abhanpur": { name: "Abhanpur Rice Bowl", lat: 21.050, lng: 81.750 } } }
+            }
+        },
+        "GA": {
+            name: "Goa",
+            districts: {
+                "northgoa": { name: "North Goa", towns: { "mapusa": { name: "Mapusa Cashew/Coconut", lat: 15.590, lng: 73.810 } } }
             }
         },
         "GJ": {
             name: "Gujarat",
             districts: {
-                "anand": {
-                    name: "Anand",
-                    towns: {
-                        "petlad": { name: "Petlad Tobacco/Cotton", lat: 22.4784, lng: 72.8084 }
-                    }
-                }
+                "anand": { name: "Anand", towns: { "petlad": { name: "Petlad Tobacco/Cotton", lat: 22.478, lng: 72.808 } } },
+                "rajkot": { name: "Rajkot", towns: { "jetpur": { name: "Jetpur Groundnut Belt", lat: 21.758, lng: 70.628 } } },
+                "surat": { name: "Surat", towns: { "bardoli": { name: "Bardoli Sugarcane", lat: 21.128, lng: 73.118 } } }
             }
         },
-        "RJ": {
-            name: "Rajasthan",
+        "HR": {
+            name: "Haryana",
             districts: {
-                "jaipur": {
-                    name: "Jaipur",
-                    towns: {
-                        "chomu": { name: "Chomu Organic Belt", lat: 26.9124, lng: 75.7873 }
-                    }
-                }
+                "karnal": { name: "Karnal", towns: { "taraori": { name: "Taraori Basmati Belt", lat: 29.800, lng: 76.930 } } },
+                "hisar": { name: "Hisar", towns: { "hans": { name: "Hansi Cotton/Mustard", lat: 29.100, lng: 75.960 } } }
             }
         },
-        "TN": {
-            name: "Tamil Nadu",
+        "HP": {
+            name: "Himachal Pradesh",
             districts: {
-                "coimbatore": {
-                    name: "Coimbatore",
-                    towns: {
-                        "pollachi": { name: "Pollachi Coconut Groves", lat: 10.6584, lng: 77.0084 }
-                    }
-                }
+                "shimla": { name: "Shimla", towns: { "kotkhai": { name: "Kotkhai Apple Orchards", lat: 31.110, lng: 77.530 } } },
+                "kullu": { name: "Kullu", towns: { "manali": { name: "Manali Fruit Valley", lat: 32.240, lng: 77.180 } } }
             }
         },
-        "TS": {
-            name: "Telangana",
+        "JH": {
+            name: "Jharkhand",
             districts: {
-                "warangal": {
-                    name: "Warangal",
-                    towns: {
-                        "jangaon": { name: "Jangaon Chilli/Cotton", lat: 17.7284, lng: 79.1784 }
-                    }
-                }
+                "ranchi": { name: "Ranchi", towns: { "kanke": { name: "Kanke Vegetable Hub", lat: 23.430, lng: 85.320 } } }
+            }
+        },
+        "KA": {
+            name: "Karnataka",
+            districts: {
+                "mysuru": { name: "Mysuru", towns: { "nanjangud": { name: "Nanjangud Banana", lat: 12.295, lng: 76.639 } } },
+                "belagavi": { name: "Belagavi", towns: { "chikodi": { name: "Chikodi Sugarcane", lat: 16.428, lng: 74.598 } } },
+                "shimoga": { name: "Shivamogga", towns: { "thirthahalli": { name: "Thirthahalli Arecanut", lat: 13.690, lng: 75.240 } } }
+            }
+        },
+        "KL": {
+            name: "Kerala",
+            districts: {
+                "wayanad": { name: "Wayanad", towns: { "kalpetta": { name: "Kalpetta Coffee/Spices", lat: 11.610, lng: 76.080 } } },
+                "idukki": { name: "Idukki", towns: { "munnar": { name: "Munnar Tea/Cardamom", lat: 10.080, lng: 77.060 } } }
             }
         },
         "MP": {
             name: "Madhya Pradesh",
             districts: {
-                "indore": {
-                    name: "Indore",
-                    towns: {
-                        "sanwer": { name: "Sanwer Soybean Belt", lat: 22.9784, lng: 75.8284 }
-                    }
-                }
+                "indore": { name: "Indore", towns: { "sanwer": { name: "Sanwer Soybean Belt", lat: 22.978, lng: 75.828 } } },
+                "ujjain": { name: "Ujjain", towns: { "nagda": { name: "Nagda Wheat/Gram", lat: 23.450, lng: 75.410 } } }
             }
-        }
+        },
+        "MH": {
+            name: "Maharashtra",
+            districts: {
+                "sangli": { name: "Sangli", towns: { "miraj": { name: "Miraj / Nishant Colony", lat: 16.8524, lng: 74.5815 }, "walwa": { name: "Walwa / Islampur", lat: 17.051, lng: 74.265 } } },
+                "pune": { name: "Pune", towns: { "baramati": { name: "Baramati Agri Hub", lat: 18.151, lng: 74.578 } } },
+                "nashik": { name: "Nashik", towns: { "niphad": { name: "Niphad Grape Valley", lat: 20.078, lng: 74.108 } } },
+                "nagpur": { name: "Nagpur", towns: { "saoner": { name: "Saoner Orange Groves", lat: 21.380, lng: 78.910 } } }
+            }
+        },
+        "MN": {
+            name: "Manipur",
+            districts: {
+                "imphal": { name: "Imphal East", towns: { "porompat": { name: "Porompat Organic Rice", lat: 24.810, lng: 93.950 } } }
+            }
+        },
+        "ML": {
+            name: "Meghalaya",
+            districts: {
+                "shillong": { name: "East Khasi Hills", towns: { "sohra": { name: "Sohra Spice Belt", lat: 25.280, lng: 91.730 } } }
+            }
+        },
+        "MZ": {
+            name: "Mizoram",
+            districts: {
+                "aizawl": { name: "Aizawl", towns: { "darlawn": { name: "Darlawn Ginger/Fruit", lat: 24.010, lng: 92.830 } } }
+            }
+        },
+        "NL": {
+            name: "Nagaland",
+            districts: {
+                "kohima": { name: "Kohima", towns: { "tseminyu": { name: "Tseminyu Terrace Rice", lat: 25.910, lng: 94.210 } } }
+            }
+        },
+        "OR": {
+            name: "Odisha",
+            districts: {
+                "cuttack": { name: "Cuttack", towns: { "banki": { name: "Banki Rice Belt", lat: 20.350, lng: 85.530 } } },
+                "sambalpur": { name: "Sambalpur", towns: { "hirakud": { name: "Hirakud Irrigated Belt", lat: 21.520, lng: 83.870 } } }
+            }
+        },
+        "PB": {
+            name: "Punjab",
+            districts: {
+                "ludhiana": { name: "Ludhiana", towns: { "jagraon": { name: "Jagraon Wheat Belt", lat: 30.9010, lng: 75.8573 }, "khanna": { name: "Khanna Grain Market", lat: 30.701, lng: 76.218 } } },
+                "amritsar": { name: "Amritsar", towns: { "ajnala": { name: "Ajnala Border Farm", lat: 31.838, lng: 74.758 } } },
+                "bathinda": { name: "Bathinda", towns: { "rampura": { name: "Rampura Cotton Belt", lat: 30.250, lng: 75.240 } } }
+            }
+        },
+        "RJ": {
+            name: "Rajasthan",
+            districts: {
+                "jaipur": { name: "Jaipur", towns: { "chomu": { name: "Chomu Organic Belt", lat: 26.9124, lng: 75.7873 } } },
+                "jodhpur": { name: "Jodhpur", towns: { "osian": { name: "Osian Cumin/Mustard", lat: 26.720, lng: 72.910 } } },
+                "ganganagar": { name: "Sri Ganganagar", towns: { "risinghnagar": { name: "Raisinghnagar Canal Farm", lat: 29.530, lng: 73.450 } } }
+            }
+        },
+        "SK": {
+            name: "Sikkim",
+            districts: {
+                "gangtok": { name: "East Sikkim", towns: { "pakyong": { name: "Pakyong Organic Cardamom", lat: 27.240, lng: 88.580 } } }
+            }
+        },
+        "TN": {
+            name: "Tamil Nadu",
+            districts: {
+                "coimbatore": { name: "Coimbatore", towns: { "pollachi": { name: "Pollachi Coconut Groves", lat: 10.658, lng: 77.008 } } },
+                "thanjavur": { name: "Thanjavur", towns: { "kumbakonam": { name: "Kumbakonam Delta Paddy", lat: 10.960, lng: 79.380 } } }
+            }
+        },
+        "TS": {
+            name: "Telangana",
+            districts: {
+                "warangal": { name: "Warangal", towns: { "jangaon": { name: "Jangaon Chilli/Cotton", lat: 17.728, lng: 79.178 } } },
+                "nizamabad": { name: "Nizamabad", towns: { "armoor": { name: "Armoor Turmeric Belt", lat: 18.780, lng: 78.280 } } }
+            }
+        },
+        "TR": {
+            name: "Tripura",
+            districts: {
+                "agartala": { name: "West Tripura", towns: { "jirania": { name: "Jirania Rubber/Pineapple", lat: 23.850, lng: 91.430 } } }
+            }
+        },
+        "UP": {
+            name: "Uttar Pradesh",
+            districts: {
+                "varanasi": { name: "Varanasi", towns: { "pindra": { name: "Pindra Agri Belt", lat: 25.488, lng: 82.858 } } },
+                "lucknow": { name: "Lucknow", towns: { "malihabad": { name: "Malihabad Mango Belt", lat: 26.918, lng: 80.718 } } },
+                "gorakhpur": { name: "Gorakhpur", towns: { "sahjanwa": { name: "Sahjanwa Sugarcane", lat: 26.750, lng: 83.240 } } }
+            }
+        },
+        "UK": {
+            name: "Uttarakhand",
+            districts: {
+                "dehradun": { name: "Dehradun", towns: { "doiwala": { name: "Doiwala Basmati/Sugarcane", lat: 30.180, lng: 78.110 } } },
+                "nainital": { name: "Nainital", towns: { "ramnagar": { name: "Ramnagar Litchi/Mango", lat: 29.390, lng: 79.120 } } }
+            }
+        },
+        "WB": {
+            name: "West Bengal",
+            districts: {
+                "kolkata": { name: "North 24 Parganas", towns: { "barasat": { name: "Barasat Jute Belt", lat: 22.5726, lng: 88.3639 } } },
+                "bardhaman": { name: "Purba Bardhaman", towns: { "kalna": { name: "Kalna Rice Bowl", lat: 23.220, lng: 88.360 } } }
+            }
+        },
+        // 8 UNION TERRITORIES
+        "AN": { name: "Andaman & Nicobar", districts: { "portblair": { name: "Port Blair", towns: { "southandaman": { name: "Coconut/Arecanut Belt", lat: 11.620, lng: 92.720 } } } } },
+        "CH": { name: "Chandigarh", districts: { "chandigarh": { name: "Chandigarh Region", towns: { "mani": { name: "Manimajra Peri-urban Farm", lat: 30.730, lng: 76.770 } } } } },
+        "DN": { name: "Dadra & Nagar Haveli", districts: { "silvassa": { name: "Silvassa", towns: { "khanvel": { name: "Khanvel Rice/Paddy", lat: 20.270, lng: 73.010 } } } } },
+        "DL": { name: "Delhi (NCT)", districts: { "delhi": { name: "Delhi Green Belt", towns: { "najafgarh": { name: "Najafgarh Farm Belt", lat: 28.610, lng: 76.980 } } } } },
+        "JK": { name: "Jammu & Kashmir", districts: { "srinagar": { name: "Srinagar", towns: { "pampore": { name: "Pampore Saffron Fields", lat: 34.010, lng: 74.920 } } }, "jammu": { name: "Jammu", towns: { "rsPura": { name: "R.S. Pura Basmati Belt", lat: 32.610, lng: 74.730 } } } } },
+        "LA": { name: "Ladakh", districts: { "leh": { name: "Leh", towns: { "nubra": { name: "Nubra Buckwheat/Apricot", lat: 34.150, lng: 77.570 } } } } },
+        "LD": { name: "Lakshadweep", districts: { "kavaratti": { name: "Kavaratti", towns: { "kavaratti_island": { name: "Coconut Groves", lat: 10.560, lng: 72.640 } } } } },
+        "PY": { name: "Puducherry", districts: { "karaikal": { name: "Karaikal", towns: { "karaikal_delta": { name: "Delta Paddy Farm", lat: 10.920, lng: 79.830 } } } } }
     };
 
     const state = {
@@ -218,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     drawParcelPolygon(state.lat, state.lng);
 
-    // Hover HUD & Hover Land Inspection Polygon
+    // Hover HUD Overlay & Hover Polygon
     const hoverHud = document.getElementById('hover-hud');
     const hudLatLng = document.getElementById('hud-latlng');
 
@@ -229,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
         hudLatLng.innerText = `Hovering Land: ${hLat.toFixed(4)} N, ${hLng.toFixed(4)} E`;
         hoverHud.classList.remove('hidden');
 
-        // Draw temporary hover polygon around cursor land parcel
         if (state.hoverPolygon) map.removeLayer(state.hoverPolygon);
 
         const d = 0.0018;
@@ -258,10 +308,21 @@ document.addEventListener('DOMContentLoaded', () => {
         window.loadRealLocation(e.latlng.lat, e.latlng.lng);
     });
 
-    // Populate Cascading Dropdowns (State -> District -> Town)
+    // Populate All 36 States & UTs in Dropdown
     const stateSelect = document.getElementById('select-geo-state');
     const districtSelect = document.getElementById('select-geo-district');
     const townSelect = document.getElementById('select-geo-town');
+
+    function populateAllStatesDropdown() {
+        const stateKeys = Object.keys(geoDatabase).sort((a,b) => geoDatabase[a].name.localeCompare(geoDatabase[b].name));
+        stateSelect.innerHTML = stateKeys.map(sKey => 
+            `<option value="${sKey}">${geoDatabase[sKey].name}</option>`
+        ).join('');
+        
+        // Default to Maharashtra
+        stateSelect.value = "MH";
+        updateDistrictDropdown();
+    }
 
     function updateDistrictDropdown() {
         const stateKey = stateSelect.value;
@@ -288,10 +349,9 @@ document.addEventListener('DOMContentLoaded', () => {
     stateSelect.addEventListener('change', updateDistrictDropdown);
     districtSelect.addEventListener('change', updateTownDropdown);
 
-    // Initial populate
-    updateDistrictDropdown();
+    populateAllStatesDropdown();
 
-    // Fly Map to Selected Location Button Handler
+    // Fly to Selected Location Button Handler
     document.getElementById('btn-fly-location').addEventListener('click', () => {
         const stateKey = stateSelect.value;
         const districtKey = districtSelect.value;
@@ -301,6 +361,61 @@ document.addEventListener('DOMContentLoaded', () => {
         if (townObj) {
             map.flyTo([townObj.lat, townObj.lng], 16, { duration: 1.5 });
             window.loadRealLocation(townObj.lat, townObj.lng);
+        }
+    });
+
+    // Instant Live City Search Box via OpenStreetMap Nominatim API
+    const searchInput = document.getElementById('input-city-search');
+    const suggestionsBox = document.getElementById('search-suggestions');
+    let searchTimeout = null;
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+        if (query.length < 3) {
+            suggestionsBox.classList.add('hidden');
+            return;
+        }
+
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(async () => {
+            try {
+                const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&countrycodes=in&format=json&limit=5`);
+                if (!res.ok) return;
+                const results = await res.json();
+
+                if (results.length === 0) {
+                    suggestionsBox.innerHTML = `<div class="suggestion-item">No location found in India</div>`;
+                } else {
+                    suggestionsBox.innerHTML = results.map(item => `
+                        <div class="suggestion-item" data-lat="${item.lat}" data-lon="${item.lon}" data-name="${item.display_name}">
+                            📍 <strong>${item.display_name.split(',')[0]}</strong> - ${item.display_name}
+                        </div>
+                    `).join('');
+                }
+                suggestionsBox.classList.remove('hidden');
+
+                // Attach click listeners to suggestions
+                document.querySelectorAll('.suggestion-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const lat = parseFloat(item.dataset.lat);
+                        const lon = parseFloat(item.dataset.lon);
+                        if (!isNaN(lat) && !isNaN(lon)) {
+                            map.flyTo([lat, lon], 16, { duration: 1.5 });
+                            window.loadRealLocation(lat, lon);
+                            suggestionsBox.classList.add('hidden');
+                            searchInput.value = item.dataset.name.split(',')[0];
+                        }
+                    });
+                });
+            } catch (err) {
+                console.warn("Search error:", err);
+            }
+        }, 300);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+            suggestionsBox.classList.add('hidden');
         }
     });
 
