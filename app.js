@@ -1,4 +1,4 @@
-// Alpha Earth Krishi Hyper-Local Dynamic Agronomic Engine
+// Alpha Earth Krishi Instant Dynamic Auto-Updating Agronomic Engine
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "NL": { name: "Nagaland", districts: ["Chümoukedima", "Dimapur", "Kiphire", "Kohima", "Longleng", "Mokokchung", "Mon", "Niuland", "Noklak", "Peren", "Phek", "Shamator", "Tseminyu", "Tuensang", "Wokha", "Zunheboto"] },
         "OR": { name: "Odisha", districts: ["Angul", "Balangir", "Balasore", "Bargarh", "Bhadrak", "Buddh", "Cuttack", "Deogarh", "Dhenkanal", "Gajapati", "Ganjam", "Jagatsinghpur", "Jajpur", "Jharsuguda", "Kalahandi", "Kandhamal", "Kendrapara", "Kendujhar", "Khordha", "Koraput", "Malkangiri", "Mayurbhanj", "Nabarangpur", "Nayagarh", "Nuapada", "Puri", "Rayagada", "Sambalpur", "Subarnapur", "Sundargarh"] },
         "PB": { name: "Punjab", districts: ["Amritsar", "Barnala", "Bathinda", "Faridkot", "Fatehgarh Sahib", "Fazilka", "Firozpur", "Gurdaspur", "Hoshiarpur", "Jalandhar", "Kapurthala", "Ludhiana", "Malerkotla", "Mansa", "Moga", "Pathankot", "Patiala", "Rupnagar", "Sahibzada Ajit Singh Nagar (Mohali)", "Sangrur", "Shahid Bhagat Singh Nagar", "Sri Muktsar Sahib", "Tarn Taran"] },
-        "RJ": { name: "Rajasthan", districts: ["Ajmer", "Alwar", "Banswara", "Baran", "Barmer", "Bharatpur", "Bhilwara", "Bikaner", "Bundi", "Chittorgarh", "Churu", "Dausa", "Dholpur", "Dungarpur", "Ganganagar", "Hanumanmarh", "Jaipur", "Jaisalmer", "Jalore", "Jhalawar", "Jhunjhunu", "Jodhpur", "Karauli", "Kota", "Nagaur", "Pali", "Pratapgarh", "Rajsamand", "Sawai Madhopur", "Sikar", "Sirohi", "Sri Ganganagar", "Tonk", "Udaipur"] },
+        "RJ": { name: "Rajasthan", districts: ["Ajmer", "Alwar", "Banswara", "Baran", "Barmer", "Bharatpur", "Bhilwara", "Bikaner", "Bundi", "Chittorgarh", "Churu", "Dausa", "Dholpur", "Dungarpur", "Ganganagar", "Hanumangarh", "Jaipur", "Jaisalmer", "Jalore", "Jhalawar", "Jhunjhunu", "Jodhpur", "Karauli", "Kota", "Nagaur", "Pali", "Pratapgarh", "Rajsamand", "Sawai Madhopur", "Sikar", "Sirohi", "Sri Ganganagar", "Tonk", "Udaipur"] },
         "SK": { name: "Sikkim", districts: ["Gangtok", "Gyalshing", "Mangan", "Namtchi", "Pakyong", "Soreng"] },
         "TN": { name: "Tamil Nadu", districts: ["Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore", "Dharmapuri", "Dindigul", "Erode", "Kallakurichi", "Kanchipuram", "Kanyakumari", "Karur", "Krishnagiri", "Madurai", "Mayiladuthurai", "Nagapattinam", "Namakkal", "Nilgiris", "Perambalur", "Pudukkottai", "Ramanathapuram", "Ranipet", "Salem", "Sivaganga", "Tenkasi", "Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli", "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur", "Vellore", "Viluppuram", "Virudhunagar"] },
         "TS": { name: "Telangana", districts: ["Adilabad", "Bhadradri Kothagudem", "Hanamkonda", "Hyderabad", "Jagtial", "Jangaon", "Jayashankar Bhupalpally", "Jogulamba Gadwal", "Kamareddy", "Karimnagar", "Khammam", "Kumuram Bheem Asifabad", "Mahabubabad", "Mahabubnagar", "Mancherial", "Medak", "Medchal-Malkajgiri", "Mulugu", "Nagarkurnool", "Nalgonda", "Narayanpet", "Nirmal", "Nizamabad", "Peddapalli", "Rajanna Sircilla", "Ranga Reddy", "Sangareddy", "Siddipet", "Suryapet", "Vikarabad", "Wanaparthy", "Warangal", "Yadadri Bhuvanagiri"] },
@@ -194,60 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ).join('');
         
         stateSelect.value = "MH"; // Default to Maharashtra
-        updateDistrictDropdown();
+        updateDistrictDropdown(false);
     }
 
-    function updateDistrictDropdown() {
-        const stateKey = stateSelect.value;
-        const districtList = indiaDistrictsMaster[stateKey] ? indiaDistrictsMaster[stateKey].districts : [];
-
-        districtSelect.innerHTML = districtList.map(dName => 
-            `<option value="${dName}">${dName}</option>`
-        ).join('');
-
-        updateTownDropdown();
-    }
-
-    // Live Dynamic Town / Taluka Resolver API
-    async function updateTownDropdown() {
-        const stateName = indiaDistrictsMaster[stateSelect.value]?.name || "";
-        const districtName = districtSelect.value;
-
-        townSelect.innerHTML = `<option value="">Fetching live towns in ${districtName}...</option>`;
-
-        try {
-            const url = `https://nominatim.openstreetmap.org/search?county=${encodeURIComponent(districtName)}&state=${encodeURIComponent(stateName)}&country=India&format=json&limit=10`;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error();
-            const results = await res.json();
-
-            if (results.length === 0) {
-                townSelect.innerHTML = `
-                    <option value="${districtName} Central">${districtName} Central Belt</option>
-                    <option value="${districtName} North">${districtName} North Agricultural Zone</option>
-                    <option value="${districtName} South">${districtName} South River Basin</option>
-                `;
-            } else {
-                townSelect.innerHTML = results.map(item => {
-                    const shortName = item.display_name.split(',')[0];
-                    return `<option value="${shortName}" data-lat="${item.lat}" data-lon="${item.lon}">${shortName} (${item.display_name.split(',')[1] || districtName})</option>`;
-                }).join('');
-            }
-        } catch (e) {
-            townSelect.innerHTML = `
-                <option value="${districtName} Central">${districtName} Central Belt</option>
-                <option value="${districtName} Rural">${districtName} Rural Farm Basin</option>
-            `;
-        }
-    }
-
-    stateSelect.addEventListener('change', updateDistrictDropdown);
-    districtSelect.addEventListener('change', updateTownDropdown);
-
-    populateAllStatesDropdown();
-
-    // Fly to Selected Location Button Handler
-    document.getElementById('btn-fly-location').addEventListener('click', async () => {
+    async function triggerAutoLocationFly() {
         const stateName = indiaDistrictsMaster[stateSelect.value]?.name || "";
         const districtName = districtSelect.value;
         const selectedOption = townSelect.options[townSelect.selectedIndex];
@@ -271,10 +221,64 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isNaN(lat) && !isNaN(lon)) {
             map.flyTo([lat, lon], 15, { duration: 1.5 });
             window.loadRealLocation(lat, lon);
-        } else {
-            window.loadRealLocation(state.lat, state.lng);
         }
-    });
+    }
+
+    function updateDistrictDropdown(autoFly = true) {
+        const stateKey = stateSelect.value;
+        const districtList = indiaDistrictsMaster[stateKey] ? indiaDistrictsMaster[stateKey].districts : [];
+
+        districtSelect.innerHTML = districtList.map(dName => 
+            `<option value="${dName}">${dName}</option>`
+        ).join('');
+
+        updateTownDropdown(autoFly);
+    }
+
+    // Live Dynamic Town / Taluka Resolver API
+    async function updateTownDropdown(autoFly = true) {
+        const stateName = indiaDistrictsMaster[stateSelect.value]?.name || "";
+        const districtName = districtSelect.value;
+
+        townSelect.innerHTML = `<option value="">Fetching live towns in ${districtName}...</option>`;
+
+        try {
+            const url = `https://nominatim.openstreetmap.org/search?county=${encodeURIComponent(districtName)}&state=${encodeURIComponent(stateName)}&country=India&format=json&limit=10`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            const results = await res.json();
+
+            if (results.length === 0) {
+                townSelect.innerHTML = `
+                    <option value="${districtName} Central" data-lat="" data-lon="">${districtName} Central Belt</option>
+                    <option value="${districtName} North" data-lat="" data-lon="">${districtName} North Agricultural Zone</option>
+                    <option value="${districtName} South" data-lat="" data-lon="">${districtName} South River Basin</option>
+                `;
+            } else {
+                townSelect.innerHTML = results.map(item => {
+                    const shortName = item.display_name.split(',')[0];
+                    return `<option value="${shortName}" data-lat="${item.lat}" data-lon="${item.lon}">${shortName} (${item.display_name.split(',')[1] || districtName})</option>`;
+                }).join('');
+            }
+        } catch (e) {
+            townSelect.innerHTML = `
+                <option value="${districtName} Central">${districtName} Central Belt</option>
+                <option value="${districtName} Rural">${districtName} Rural Farm Basin</option>
+            `;
+        }
+
+        if (autoFly) {
+            triggerAutoLocationFly();
+        }
+    }
+
+    stateSelect.addEventListener('change', () => updateDistrictDropdown(true));
+    districtSelect.addEventListener('change', () => updateTownDropdown(true));
+    townSelect.addEventListener('change', () => triggerAutoLocationFly());
+
+    populateAllStatesDropdown();
+
+    document.getElementById('btn-fly-location').addEventListener('click', triggerAutoLocationFly);
 
     // Instant Live City Search Box
     const searchInput = document.getElementById('input-city-search');
@@ -530,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Dynamic Crop Recommendations (HYPER-LOCAL LOCATION & SEED ADAPTIVE!)
+    // Dynamic Crop Recommendations
     function renderCropRecommendations(region, lat, lng) {
         const listEl = document.getElementById('recommended-crops-list');
         const seed = getCoordSeed(lat, lng);
@@ -574,7 +578,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: "Yellow Mustard / Oilseed", icon: "🌾", tags: ["Rabi Crop", "Short Duration"], profit: `₹${profit3.toLocaleString()} / Acre`, score: Math.round(89 + seed * 5) + "% Fit" }
             ];
         } else {
-            // Deccan / West Region
             const profit1 = 155000 + Math.round(seed * 25000);
             const profit2 = 185000 + Math.round(seed * 30000);
             const profit3 = 56000 + Math.round(seed * 10000);
@@ -604,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Dynamic Neighbor Crop Spectrum (HYPER-LOCAL SEED VARYING PER FARMLAND!)
+    // Dynamic Neighbor Crop Spectrum
     function renderNeighborChart(region, lat, lng) {
         const ctx = document.getElementById('neighborChart').getContext('2d');
         if (state.charts.neighbor) state.charts.neighbor.destroy();
@@ -616,7 +619,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let colors = ['#10b981', '#06b6d4', '#f59e0b', '#64748b', '#8b5cf6'];
         let htmlList = '';
 
-        // Dynamic Percentage Calculations for Neighboring Parcels
         const p1 = Math.round(38 + seed * 14);
         const p2 = Math.round(22 + seed * 10);
         const p3 = Math.round(14 + seed * 8);
@@ -792,7 +794,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderClimateChart(e.target.value);
     });
 
-    // Master Location Orchestrator (100% DYNAMIC FOR EVERY COORDINATE & CITY!)
+    // Master Location Orchestrator
     window.loadRealLocation = async function(lat, lng) {
         state.lat = lat;
         state.lng = lng;
