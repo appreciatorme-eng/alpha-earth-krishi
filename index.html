@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Earth Krishi | All 766 Districts & Towns of India</title>
-    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App covering all 766 Districts and thousands of Towns/Villages across India with Live Google Maps & OpenStreetMap Geocoding.">
+    <title>Alpha Earth Krishi | Hybrid Satellite & Landmark Labels Navigator</title>
+    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App with Hybrid Satellite Imagery, Real-Time Landmark Labels, Road/Village Names, and 766 Indian District Navigation.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">All 766 Districts & Towns GeoAg Navigator</span>
+                    <span class="brand-subtitle">Hybrid Satellite & Landmark Navigator</span>
                 </div>
             </div>
             
@@ -44,8 +44,8 @@
                 </button>
 
                 <div class="metric-pill">
-                    <i data-lucide="globe"></i>
-                    <span>Open-Meteo Live API</span>
+                    <i data-lucide="map"></i>
+                    <span>Landmark Labels Enabled</span>
                 </div>
                 <div class="status-indicator" id="api-status-pill">
                     <span class="dot"></span> Live API Active
@@ -65,7 +65,7 @@
                     <!-- Google Maps / OSM Live Search Input Box -->
                     <div class="input-group" style="position:relative;">
                         <label><i data-lucide="search" style="width:12px; height:12px; display:inline;"></i> Google Maps / OSM Instant Search</label>
-                        <input type="text" id="input-city-search" placeholder="Search any City, Town or Village in India..." autocomplete="off">
+                        <input type="text" id="input-city-search" placeholder="Search any City, Town, Village or Landmark..." autocomplete="off">
                         <div id="search-suggestions" class="suggestions-box hidden"></div>
                     </div>
 
@@ -212,12 +212,13 @@
 
             <!-- Workspace View (Map + Full Suite Modules) -->
             <section class="workspace-area">
-                <!-- Interactive Map Section with Hover HUD overlay -->
+                <!-- Interactive Map Section with Layer Switcher & Landmark Labels -->
                 <div class="map-card card">
                     <div class="map-toolbar">
                         <div class="layer-selector">
-                            <span class="toolbar-title"><i data-lucide="layers"></i> Satellite Layers:</span>
-                            <button class="layer-btn active" data-layer="rgb">True Color (RGB)</button>
+                            <span class="toolbar-title"><i data-lucide="layers"></i> Map Layers:</span>
+                            <button class="layer-btn active" data-layer="hybrid"><i data-lucide="tag" style="width:12px; height:12px; display:inline;"></i> Hybrid (Satellite + Landmarks)</button>
+                            <button class="layer-btn" data-layer="rgb">Pure Satellite (RGB)</button>
                             <button class="layer-btn" data-layer="ndvi">NDVI (Crop Health)</button>
                             <button class="layer-btn" data-layer="moisture">Soil Moisture (NDWI)</button>
                             <button class="layer-btn" data-layer="cadastral">Cadastral Grid</button>
