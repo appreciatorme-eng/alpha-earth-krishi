@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Earth Krishi | Complete Zero-Cost Web AgTech Platform</title>
+    <title>Alpha Earth Krishi | Dynamic Multi-Modal GeoAg Platform</title>
     <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App for Indian Farmers powered by Open-Meteo, Web Speech AI, Computer Vision, ET0 Irrigation, PMFBY Insurance, and KCC Credit Scoring.">
     
     <!-- Google Fonts -->
@@ -32,7 +32,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">100% Free Browser-Native AgTech Super-App</span>
+                    <span class="brand-subtitle">Dynamic GeoAg Platform for Indian Farmers</span>
                 </div>
             </div>
             
@@ -59,7 +59,7 @@
             <aside class="sidebar">
                 <div class="card search-card">
                     <h3><i data-lucide="search"></i> Farm Land Identification</h3>
-                    <p class="card-desc">Click map or input location for instant live open-data analytics.</p>
+                    <p class="card-desc">Click map or input location to dynamically update all regional recommendations & telemetry.</p>
                     
                     <div class="tab-buttons">
                         <button class="tab-btn active" data-tab="coords"><i data-lucide="map-pin"></i> Coordinates</button>
@@ -81,6 +81,7 @@
                             <button class="chip-btn" onclick="loadRealLocation(16.8524, 74.5815)">Sangli, MH</button>
                             <button class="chip-btn" onclick="loadRealLocation(30.9010, 75.8573)">Ludhiana, PB</button>
                             <button class="chip-btn" onclick="loadRealLocation(12.2958, 76.6394)">Mysuru, KA</button>
+                            <button class="chip-btn" onclick="loadRealLocation(22.5726, 88.3639)">Kolkata, WB</button>
                         </div>
                         <button class="btn btn-primary" id="btn-analyze-coords"><i data-lucide="refresh-cw"></i> Fetch Live Open-Meteo Data</button>
                     </div>
@@ -265,7 +266,7 @@
                                 <ul>
                                     <li><strong>Eligible Credit Limit:</strong> ₹2,50,000 (Collateral-Free)</li>
                                     <li><strong>Interest Subvention Rate:</strong> 4.0% per annum (Govt. Subsidized)</li>
-                                    <li><strong>5-Year Satellite Yield Stability:</strong> 94.2% (Low Risk Profile)</li>
+                                    <li><strong>5-Year Satellite Yield Stability:</strong> <span id="val-stability-pct">94.2%</span> (Low Risk Profile)</li>
                                 </ul>
                             </div>
                         </div>
@@ -285,8 +286,9 @@
                             </div>
                             <div class="fpo-table">
                                 <div class="fpo-row header"><span>Commodity</span><span>Neighbors Growing</span><span>Aggregated Volume</span><span>Direct Buyer Rate</span></div>
-                                <div class="fpo-row"><span>Rajapuri Turmeric</span><span>15 Farmers (110 Acres)</span><span>330 Tonnes</span><span class="profit-val">₹16,500 / Qtl (+18% vs Mandi)</span></div>
-                                <div class="fpo-row"><span>Sugarcane (Co 86032)</span><span>42 Farmers (310 Acres)</span><span>12,400 Tonnes</span><span class="profit-val">₹3,400 / Tonne (Direct Sugar Mill)</span></div>
+                                <div id="fpo-table-body">
+                                    <!-- Dynamically Populated via JS -->
+                                </div>
                             </div>
                         </div>
                     </div>
