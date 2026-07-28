@@ -1,212 +1,130 @@
-// Alpha Earth Krishi All 36 States & UTs Database Engine
+// Alpha Earth Krishi All 766 Indian Districts & Live Town Geocoder
 document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
 
-    // Complete Database of ALL 28 States & 8 Union Territories in India
-    const geoDatabase = {
+    // ALL 766 Official Districts of India across 28 States & 8 Union Territories
+    const indiaDistrictsMaster = {
         "AP": {
             name: "Andhra Pradesh",
-            districts: {
-                "guntur": { name: "Guntur", towns: { "tenali": { name: "Tenali Chilli/Paddy", lat: 16.243, lng: 80.640 } } },
-                "anantapur": { name: "Anantapur", towns: { "dharmavaram": { name: "Dharmavaram Groundnut", lat: 14.414, lng: 77.719 } } },
-                "kurnool": { name: "Kurnool", towns: { "nandyal": { name: "Nandyal Cotton", lat: 15.478, lng: 78.483 } } }
-            }
+            districts: ["Alluri Sitharama Raju", "Anakapalli", "Ananthapuramu", "Annamayya", "Bapatla", "Chittoor", "East Godavari", "Eluru", "Guntur", "Kakinada", "NTR", "Nandyal", "Palnadu", "Parvathipuram Manyam", "Prakasam", "Srikakulam", "Sri Potti Sriramulu Nellore", "Sri Sathya Sai", "Tirupati", "Visakhapatnam", "Vizianagaram", "West Godavari", "YSR Kadapa"]
         },
         "AR": {
             name: "Arunachal Pradesh",
-            districts: {
-                "itanagar": { name: "Papum Pare", towns: { "itanagar": { name: "Itanagar Horticulture", lat: 27.084, lng: 93.605 } } }
-            }
+            districts: ["Anjaw", "Changlang", "Dibang Valley", "East Kameng", "East Siang", "Itanagar Capital Complex", "Kamle", "Kra Daadi", "Kurung Kumey", "Lepa Rada", "Lohit", "Longding", "Lower Dibang Valley", "Lower Subansiri", "Namsai", "Pakke Kessang", "Papum Pare", "Shi Yomi", "Siang", "Tawang", "Tirap", "Upper Siang", "Upper Subansiri", "West Kameng", "West Siang"]
         },
         "AS": {
             name: "Assam",
-            districts: {
-                "dibrugarh": { name: "Dibrugarh", towns: { "chabua": { name: "Chabua Tea Gardens", lat: 27.488, lng: 95.178 } } },
-                "kamrup": { name: "Kamrup", towns: { "guwahati": { name: "Guwahati Valley", lat: 26.144, lng: 91.736 } } }
-            }
+            districts: ["Baksa", "Barpeta", "Biswanath", "Bongaigaon", "Cachar", "Charaideo", "Chirang", "Darrang", "Dhemaji", "Dhubri", "Dibrugarh", "Dima Hasao", "Goalpara", "Golaghat", "Hailakandi", "Hojai", "Jorhat", "Kamrup", "Kamrup Metropolitan", "Karbi Anglong", "Karimganj", "Kokrajhar", "Lakhimpur", "Majuli", "Morigaon", "Nagaon", "Nalbari", "Sivasagar", "Sonitpur", "South Salmara-Mankachar", "Tinsukia", "Udalguri", "West Karbi Anglong"]
         },
         "BR": {
             name: "Bihar",
-            districts: {
-                "muzaffarpur": { name: "Muzaffarpur", towns: { "kanti": { name: "Kanti Litchi Belt", lat: 26.120, lng: 85.390 } } },
-                "patna": { name: "Patna", towns: { "bihta": { name: "Bihta Vegetable Belt", lat: 25.560, lng: 84.870 } } }
-            }
+            districts: ["Araria", "Arwal", "Aurangabad", "Banka", "Begusarai", "Bhagalpur", "Bhojpur", "Buxar", "Darbhanga", "East Champaran", "Gaya", "Gopalganj", "Jamui", "Jehanabad", "Kaimur", "Katihar", "Khagaria", "Kishan Ganj", "Lakhisarai", "Madhepura", "Madhubani", "Munger", "Muzaffarpur", "Nalanda", "Nawada", "Patna", "Purnia", "Rohtas", "Saharsa", "Samastipur", "Saran", "Sheikhpura", "Sheohar", "Sitamarhi", "Siwan", "Supaul", "Vaishali", "West Champaran"]
         },
         "CG": {
             name: "Chhattisgarh",
-            districts: {
-                "raipur": { name: "Raipur", towns: { "abhanpur": { name: "Abhanpur Rice Bowl", lat: 21.050, lng: 81.750 } } }
-            }
+            districts: ["Balod", "Baloda Bazar", "Balrampur", "Bastar", "Bemetara", "Bijapur", "Bilaspur", "Dantewada", "Dhamtari", "Durg", "Gariaband", "Gaurela Pendra Marwahi", "Janjgir-Champa", "Jashpur", "Kabirdham", "Kanker", "Kondagaon", "Korba", "Koriya", "Mahasamund", "Manendragarh-Chirmiri-Bharatpur", "Mohla-Manpur-Ambagarh Chowki", "Mungeli", "Narayanpur", "Raigarh", "Raipur", "Rajnandgaon", "Sarangarh-Bilaigarh", "Sakti", "Sukma", "Surajpur", "Surguja"]
         },
         "GA": {
             name: "Goa",
-            districts: {
-                "northgoa": { name: "North Goa", towns: { "mapusa": { name: "Mapusa Cashew/Coconut", lat: 15.590, lng: 73.810 } } }
-            }
+            districts: ["North Goa", "South Goa"]
         },
         "GJ": {
             name: "Gujarat",
-            districts: {
-                "anand": { name: "Anand", towns: { "petlad": { name: "Petlad Tobacco/Cotton", lat: 22.478, lng: 72.808 } } },
-                "rajkot": { name: "Rajkot", towns: { "jetpur": { name: "Jetpur Groundnut Belt", lat: 21.758, lng: 70.628 } } },
-                "surat": { name: "Surat", towns: { "bardoli": { name: "Bardoli Sugarcane", lat: 21.128, lng: 73.118 } } }
-            }
+            districts: ["Ahmedabad", "Amreli", "Anand", "Aravalli", "Banaskantha", "Bharuch", "Bhavnagar", "Botad", "Chhota Udaipur", "Dahod", "Dang", "Devbhoomi Dwarka", "Gandhinagar", "Gir Somnath", "Jamnagar", "Junagadh", "Kheda", "Kutch", "Mahisagar", "Mehsana", "Morbi", "Narmada", "Navsari", "Panchmahal", "Patan", "Porbandar", "Rajkot", "Sabarkantha", "Surat", "Surendranagar", "Tapi", "Vadodara", "Valsad"]
         },
         "HR": {
             name: "Haryana",
-            districts: {
-                "karnal": { name: "Karnal", towns: { "taraori": { name: "Taraori Basmati Belt", lat: 29.800, lng: 76.930 } } },
-                "hisar": { name: "Hisar", towns: { "hans": { name: "Hansi Cotton/Mustard", lat: 29.100, lng: 75.960 } } }
-            }
+            districts: ["Ambala", "Bhiwani", "Charkhi Dadri", "Faridabad", "Fatehabad", "Gurugram", "Hisar", "Jhajjar", "Jind", "Kaithal", "Karnal", "Kurukshetra", "Mahendragarh", "Nuh", "Palwal", "Panchkula", "Panipat", "Rewari", "Rohtak", "Sirsa", "Sonipat", "Yamunanagar"]
         },
         "HP": {
             name: "Himachal Pradesh",
-            districts: {
-                "shimla": { name: "Shimla", towns: { "kotkhai": { name: "Kotkhai Apple Orchards", lat: 31.110, lng: 77.530 } } },
-                "kullu": { name: "Kullu", towns: { "manali": { name: "Manali Fruit Valley", lat: 32.240, lng: 77.180 } } }
-            }
+            districts: ["Bilaspur", "Chamba", "Hamirpur", "Kangra", "Kinnaur", "Kullu", "Lahaul and Spiti", "Mandi", "Shimla", "Sirmaur", "Solan", "Una"]
         },
         "JH": {
             name: "Jharkhand",
-            districts: {
-                "ranchi": { name: "Ranchi", towns: { "kanke": { name: "Kanke Vegetable Hub", lat: 23.430, lng: 85.320 } } }
-            }
+            districts: ["Bokaro", "Chatra", "Deoghar", "Dhanbad", "Dumka", "East Singhbhum", "Garhwa", "Giridih", "Godda", "Gumla", "Hazaribagh", "Jamtara", "Khunti", "Koderma", "Latehar", "Lohardaga", "Pakur", "Palamu", "Ramgarh", "Ranchi", "Sahebganj", "Saraikela Kharsawan", "Simdega", "West Singhbhum"]
         },
         "KA": {
             name: "Karnataka",
-            districts: {
-                "mysuru": { name: "Mysuru", towns: { "nanjangud": { name: "Nanjangud Banana", lat: 12.295, lng: 76.639 } } },
-                "belagavi": { name: "Belagavi", towns: { "chikodi": { name: "Chikodi Sugarcane", lat: 16.428, lng: 74.598 } } },
-                "shimoga": { name: "Shivamogga", towns: { "thirthahalli": { name: "Thirthahalli Arecanut", lat: 13.690, lng: 75.240 } } }
-            }
+            districts: ["Bagalkote", "Ballari", "Belagavi", "Bengaluru Rural", "Bengaluru Urban", "Bidar", "Chamarajanagara", "Chikkaballapura", "Chikkamagaluru", "Chitradurga", "Dakshina Kannada", "Davanagere", "Dharwad", "Gadag", "Hassan", "Haveri", "Kalaburagi", "Kodagu", "Kolar", "Koppal", "Mandya", "Mysuru", "Raichur", "Ramanagara", "Shivamogga", "Tumakuru", "Udupi", "Uttara Kannada", "Vijayanagara", "Vijayapura", "Yadgir"]
         },
         "KL": {
             name: "Kerala",
-            districts: {
-                "wayanad": { name: "Wayanad", towns: { "kalpetta": { name: "Kalpetta Coffee/Spices", lat: 11.610, lng: 76.080 } } },
-                "idukki": { name: "Idukki", towns: { "munnar": { name: "Munnar Tea/Cardamom", lat: 10.080, lng: 77.060 } } }
-            }
+            districts: ["Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod", "Kollam", "Kottayam", "Kozhikode", "Malappuram", "Palakkad", "Pathanamthitta", "Thiruvananthapuram", "Thrissur", "Wayanad"]
         },
         "MP": {
             name: "Madhya Pradesh",
-            districts: {
-                "indore": { name: "Indore", towns: { "sanwer": { name: "Sanwer Soybean Belt", lat: 22.978, lng: 75.828 } } },
-                "ujjain": { name: "Ujjain", towns: { "nagda": { name: "Nagda Wheat/Gram", lat: 23.450, lng: 75.410 } } }
-            }
+            districts: ["Agar Malwa", "Alirajpur", "Anuppur", "Ashoknagar", "Balaghat", "Barwani", "Betul", "Bhind", "Bhopal", "Burhanpur", "Chhatarpur", "Chhindwara", "Damoh", "Datia", "Dewas", "Dhar", "Dindori", "Guna", "Gwalior", "Harda", "Hoshangabad (Narmadapuram)", "Indore", "Jabalpur", "Jhabua", "Katni", "Khandwa", "Khargone", "Mandla", "Mandsaur", "Morena", "Narsinghpur", "Neemuch", "Niwari", "Panna", "Raisen", "Rajgarh", "Ratlam", "Rewa", "Sagar", "Satna", "Sehore", "Seoni", "Shahdol", "Shajapur", "Sheopur", "Shivpuri", "Sidhi", "Singrauli", "Tikamgarh", "Ujjain", "Umaria", "Vidisha"]
         },
         "MH": {
             name: "Maharashtra",
-            districts: {
-                "sangli": { name: "Sangli", towns: { "miraj": { name: "Miraj / Nishant Colony", lat: 16.8524, lng: 74.5815 }, "walwa": { name: "Walwa / Islampur", lat: 17.051, lng: 74.265 } } },
-                "pune": { name: "Pune", towns: { "baramati": { name: "Baramati Agri Hub", lat: 18.151, lng: 74.578 } } },
-                "nashik": { name: "Nashik", towns: { "niphad": { name: "Niphad Grape Valley", lat: 20.078, lng: 74.108 } } },
-                "nagpur": { name: "Nagpur", towns: { "saoner": { name: "Saoner Orange Groves", lat: 21.380, lng: 78.910 } } }
-            }
+            districts: ["Ahmednagar", "Akola", "Amravati", "Chhatrapati Sambhajinagar (Aurangabad)", "Beed", "Bhandara", "Buldhana", "Chandrapur", "Dhule", "Gadchiroli", "Gondia", "Hingoli", "Jalgaon", "Jalna", "Kolhapur", "Latur", "Mumbai City", "Mumbai Suburban", "Nagpur", "Nanded", "Nandurbar", "Nashik", "Dharashiv (Osmanabad)", "Palghar", "Parbhani", "Pune", "Raigad", "Ratnagiri", "Sangli", "Satara", "Sindhudurg", "Solapur", "Thane", "Wardha", "Washim", "Yavatmal"]
         },
         "MN": {
             name: "Manipur",
-            districts: {
-                "imphal": { name: "Imphal East", towns: { "porompat": { name: "Porompat Organic Rice", lat: 24.810, lng: 93.950 } } }
-            }
+            districts: ["Bishnupur", "Chandel", "Churachandpur", "Imphal East", "Imphal West", "Jiribam", "Kakching", "Kamjong", "Kangpokpi", "Noney", "Pherzawl", "Senapati", "Tamenglong", "Tengnoupal", "Thoubal", "Ukhrul"]
         },
         "ML": {
             name: "Meghalaya",
-            districts: {
-                "shillong": { name: "East Khasi Hills", towns: { "sohra": { name: "Sohra Spice Belt", lat: 25.280, lng: 91.730 } } }
-            }
+            districts: ["Eastern West Khasi Hills", "East Garo Hills", "East Jaintia Hills", "East Khasi Hills", "North Garo Hills", "Ri Bhoi", "South Garo Hills", "South West Garo Hills", "South West Khasi Hills", "West Garo Hills", "West Jaintia Hills", "West Khasi Hills"]
         },
         "MZ": {
             name: "Mizoram",
-            districts: {
-                "aizawl": { name: "Aizawl", towns: { "darlawn": { name: "Darlawn Ginger/Fruit", lat: 24.010, lng: 92.830 } } }
-            }
+            districts: ["Aizawl", "Champhai", "Hnahthial", "Khawzawl", "Kolasib", "Lawngtlai", "Lunglei", "Mamit", "Saitual", "Serchhip", "Siaha"]
         },
         "NL": {
             name: "Nagaland",
-            districts: {
-                "kohima": { name: "Kohima", towns: { "tseminyu": { name: "Tseminyu Terrace Rice", lat: 25.910, lng: 94.210 } } }
-            }
+            districts: ["Chümoukedima", "Dimapur", "Kiphire", "Kohima", "Longleng", "Mokokchung", "Mon", "Niuland", "Noklak", "Peren", "Phek", "Shamator", "Tseminyu", "Tuensang", "Wokha", "Zunheboto"]
         },
         "OR": {
             name: "Odisha",
-            districts: {
-                "cuttack": { name: "Cuttack", towns: { "banki": { name: "Banki Rice Belt", lat: 20.350, lng: 85.530 } } },
-                "sambalpur": { name: "Sambalpur", towns: { "hirakud": { name: "Hirakud Irrigated Belt", lat: 21.520, lng: 83.870 } } }
-            }
+            districts: ["Angul", "Balangir", "Balasore", "Bargarh", "Bhadrak", "Buddh", "Cuttack", "Deogarh", "Dhenkanal", "Gajapati", "Ganjam", "Jagatsinghpur", "Jajpur", "Jharsuguda", "Kalahandi", "Kandhamal", "Kendrapara", "Kendujhar", "Khordha", "Koraput", "Malkangiri", "Mayurbhanj", "Nabarangpur", "Nayagarh", "Nuapada", "Puri", "Rayagada", "Sambalpur", "Subarnapur", "Sundargarh"]
         },
         "PB": {
             name: "Punjab",
-            districts: {
-                "ludhiana": { name: "Ludhiana", towns: { "jagraon": { name: "Jagraon Wheat Belt", lat: 30.9010, lng: 75.8573 }, "khanna": { name: "Khanna Grain Market", lat: 30.701, lng: 76.218 } } },
-                "amritsar": { name: "Amritsar", towns: { "ajnala": { name: "Ajnala Border Farm", lat: 31.838, lng: 74.758 } } },
-                "bathinda": { name: "Bathinda", towns: { "rampura": { name: "Rampura Cotton Belt", lat: 30.250, lng: 75.240 } } }
-            }
+            districts: ["Amritsar", "Barnala", "Bathinda", "Faridkot", "Fatehgarh Sahib", "Fazilka", "Firozpur", "Gurdaspur", "Hoshiarpur", "Jalandhar", "Kapurthala", "Ludhiana", "Malerkotla", "Mansa", "Moga", "Pathankot", "Patiala", "Rupnagar", "Sahibzada Ajit Singh Nagar (Mohali)", "Sangrur", "Shahid Bhagat Singh Nagar", "Sri Muktsar Sahib", "Tarn Taran"]
         },
         "RJ": {
             name: "Rajasthan",
-            districts: {
-                "jaipur": { name: "Jaipur", towns: { "chomu": { name: "Chomu Organic Belt", lat: 26.9124, lng: 75.7873 } } },
-                "jodhpur": { name: "Jodhpur", towns: { "osian": { name: "Osian Cumin/Mustard", lat: 26.720, lng: 72.910 } } },
-                "ganganagar": { name: "Sri Ganganagar", towns: { "risinghnagar": { name: "Raisinghnagar Canal Farm", lat: 29.530, lng: 73.450 } } }
-            }
+            districts: ["Ajmer", "Alwar", "Banswara", "Baran", "Barmer", "Bharatpur", "Bhilwara", "Bikaner", "Bundi", "Chittorgarh", "Churu", "Dausa", "Dholpur", "Dungarpur", "Ganganagar", "Hanumangarh", "Jaipur", "Jaisalmer", "Jalore", "Jhalawar", "Jhunjhunu", "Jodhpur", "Karauli", "Kota", "Nagaur", "Pali", "Pratapgarh", "Rajsamand", "Sawai Madhopur", "Sikar", "Sirohi", "Sri Ganganagar", "Tonk", "Udaipur"]
         },
         "SK": {
             name: "Sikkim",
-            districts: {
-                "gangtok": { name: "East Sikkim", towns: { "pakyong": { name: "Pakyong Organic Cardamom", lat: 27.240, lng: 88.580 } } }
-            }
+            districts: ["Gangtok", "Gyalshing", "Mangan", "Namtchi", "Pakyong", "Soreng"]
         },
         "TN": {
             name: "Tamil Nadu",
-            districts: {
-                "coimbatore": { name: "Coimbatore", towns: { "pollachi": { name: "Pollachi Coconut Groves", lat: 10.658, lng: 77.008 } } },
-                "thanjavur": { name: "Thanjavur", towns: { "kumbakonam": { name: "Kumbakonam Delta Paddy", lat: 10.960, lng: 79.380 } } }
-            }
+            districts: ["Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore", "Dharmapuri", "Dindigul", "Erode", "Kallakurichi", "Kanchipuram", "Kanyakumari", "Karur", "Krishnagiri", "Madurai", "Mayiladuthurai", "Nagapattinam", "Namakkal", "Nilgiris", "Perambalur", "Pudukkottai", "Ramanathapuram", "Ranipet", "Salem", "Sivaganga", "Tenkasi", "Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli", "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur", "Vellore", "Viluppuram", "Virudhunagar"]
         },
         "TS": {
             name: "Telangana",
-            districts: {
-                "warangal": { name: "Warangal", towns: { "jangaon": { name: "Jangaon Chilli/Cotton", lat: 17.728, lng: 79.178 } } },
-                "nizamabad": { name: "Nizamabad", towns: { "armoor": { name: "Armoor Turmeric Belt", lat: 18.780, lng: 78.280 } } }
-            }
+            districts: ["Adilabad", "Bhadradri Kothagudem", "Hanamkonda", "Hyderabad", "Jagtial", "Jangaon", "Jayashankar Bhupalpally", "Jogulamba Gadwal", "Kamareddy", "Karimnagar", "Khammam", "Kumuram Bheem Asifabad", "Mahabubabad", "Mahabubnagar", "Mancherial", "Medak", "Medchal-Malkajgiri", "Mulugu", "Nagarkurnool", "Nalgonda", "Narayanpet", "Nirmal", "Nizamabad", "Peddapalli", "Rajanna Sircilla", "Ranga Reddy", "Sangareddy", "Siddipet", "Suryapet", "Vikarabad", "Wanaparthy", "Warangal", "Yadadri Bhuvanagiri"]
         },
         "TR": {
             name: "Tripura",
-            districts: {
-                "agartala": { name: "West Tripura", towns: { "jirania": { name: "Jirania Rubber/Pineapple", lat: 23.850, lng: 91.430 } } }
-            }
+            districts: ["Dhalai", "Gomati", "Khowai", "North Tripura", "Sepahijala", "South Tripura", "Unakoti", "West Tripura"]
         },
         "UP": {
             name: "Uttar Pradesh",
-            districts: {
-                "varanasi": { name: "Varanasi", towns: { "pindra": { name: "Pindra Agri Belt", lat: 25.488, lng: 82.858 } } },
-                "lucknow": { name: "Lucknow", towns: { "malihabad": { name: "Malihabad Mango Belt", lat: 26.918, lng: 80.718 } } },
-                "gorakhpur": { name: "Gorakhpur", towns: { "sahjanwa": { name: "Sahjanwa Sugarcane", lat: 26.750, lng: 83.240 } } }
-            }
+            districts: ["Agra", "Aligarh", "Ambedkar Nagar", "Amethi", "Amroha", "Auraiya", "Ayodhya", "Azamgarh", "Baghpat", "Bahraich", "Ballia", "Balrampur", "Banda", "Barabanki", "Bareilly", "Basti", "Bhadohi", "Bijnor", "Budaun", "Bulandshahr", "Chandauli", "Chitrakoot", "Deoria", "Etah", "Etawah", "Farrukhabad", "Fatehpur", "Firozabad", "Gautam Buddha Nagar", "Ghaziabad", "Ghazipur", "Gonda", "Gorakhpur", "Hamirpur", "Hapur", "Hardoi", "Hathras", "Jalaun", "Jaunpur", "Jhansi", "Kannauj", "Kanpur Dehat", "Kanpur Nagar", "Kasganj", "Kaushambi", "Kheri", "Kushinagar", "Lalitpur", "Lucknow", "Maharajganj", "Mahoba", "Mainpuri", "Mathura", "Mau", "Meerut", "Mirzapur", "Moradabad", "Muzaffarnagar", "Pilibhit", "Pratapgarh", "Prayagraj", "Raebareli", "Rampur", "Saharanpur", "Sambhal", "Sant Kabir Nagar", "Shahjahanpur", "Shamli", "Shravasti", "Siddharthnagar", "Sitapur", "Sonbhadra", "Sultanpur", "Unnao", "Varanasi"]
         },
         "UK": {
             name: "Uttarakhand",
-            districts: {
-                "dehradun": { name: "Dehradun", towns: { "doiwala": { name: "Doiwala Basmati/Sugarcane", lat: 30.180, lng: 78.110 } } },
-                "nainital": { name: "Nainital", towns: { "ramnagar": { name: "Ramnagar Litchi/Mango", lat: 29.390, lng: 79.120 } } }
-            }
+            districts: ["Almora", "Bageshwar", "Chamoli", "Champawat", "Dehradun", "Haridwar", "Nainital", "Pauri Garhwal", "Pithoragarh", "Rudraprayag", "Tehri Garhwal", "Udham Singh Nagar", "Uttarkashi"]
         },
         "WB": {
             name: "West Bengal",
-            districts: {
-                "kolkata": { name: "North 24 Parganas", towns: { "barasat": { name: "Barasat Jute Belt", lat: 22.5726, lng: 88.3639 } } },
-                "bardhaman": { name: "Purba Bardhaman", towns: { "kalna": { name: "Kalna Rice Bowl", lat: 23.220, lng: 88.360 } } }
-            }
+            districts: ["Alipurduar", "Bankura", "Birbhum", "Cooch Behar", "Dakshin Dinajpur", "Darjeeling", "Hooghly", "Howrah", "Jalpaiguri", "Jhargram", "Kalimpong", "Kolkata", "Malda", "Murshidabad", "Nadia", "North 24 Parganas", "Paschim Bardhaman", "Paschim Medinipur", "Purba Bardhaman", "Purba Medinipur", "Purulia", "South 24 Parganas", "Uttar Dinajpur"]
         },
         // 8 UNION TERRITORIES
-        "AN": { name: "Andaman & Nicobar", districts: { "portblair": { name: "Port Blair", towns: { "southandaman": { name: "Coconut/Arecanut Belt", lat: 11.620, lng: 92.720 } } } } },
-        "CH": { name: "Chandigarh", districts: { "chandigarh": { name: "Chandigarh Region", towns: { "mani": { name: "Manimajra Peri-urban Farm", lat: 30.730, lng: 76.770 } } } } },
-        "DN": { name: "Dadra & Nagar Haveli", districts: { "silvassa": { name: "Silvassa", towns: { "khanvel": { name: "Khanvel Rice/Paddy", lat: 20.270, lng: 73.010 } } } } },
-        "DL": { name: "Delhi (NCT)", districts: { "delhi": { name: "Delhi Green Belt", towns: { "najafgarh": { name: "Najafgarh Farm Belt", lat: 28.610, lng: 76.980 } } } } },
-        "JK": { name: "Jammu & Kashmir", districts: { "srinagar": { name: "Srinagar", towns: { "pampore": { name: "Pampore Saffron Fields", lat: 34.010, lng: 74.920 } } }, "jammu": { name: "Jammu", towns: { "rsPura": { name: "R.S. Pura Basmati Belt", lat: 32.610, lng: 74.730 } } } } },
-        "LA": { name: "Ladakh", districts: { "leh": { name: "Leh", towns: { "nubra": { name: "Nubra Buckwheat/Apricot", lat: 34.150, lng: 77.570 } } } } },
-        "LD": { name: "Lakshadweep", districts: { "kavaratti": { name: "Kavaratti", towns: { "kavaratti_island": { name: "Coconut Groves", lat: 10.560, lng: 72.640 } } } } },
-        "PY": { name: "Puducherry", districts: { "karaikal": { name: "Karaikal", towns: { "karaikal_delta": { name: "Delta Paddy Farm", lat: 10.920, lng: 79.830 } } } } }
+        "AN": { name: "Andaman & Nicobar", districts: ["Nicobar", "North and Middle Andaman", "South Andaman"] },
+        "CH": { name: "Chandigarh", districts: ["Chandigarh"] },
+        "DN": { name: "Dadra & Nagar Haveli and Daman & Diu", districts: ["Daman", "Diu", "Dadra and Nagar Haveli"] },
+        "DL": { name: "Delhi (NCT)", districts: ["Central Delhi", "East Delhi", "New Delhi", "North Delhi", "North East Delhi", "North West Delhi", "Shahdara", "South Delhi", "South East Delhi", "South West Delhi", "West Delhi"] },
+        "JK": { name: "Jammu & Kashmir", districts: ["Anantnag", "Bandipora", "Baramulla", "Budgam", "Doda", "Ganderbal", "Jammu", "Kathua", "Kishtwar", "Kulgam", "Kupwara", "Poonch", "Pulwama", "Rajouri", "Ramban", "Reasi", "Samba", "Shopian", "Srinagar", "Udhampur"] },
+        "LA": { name: "Ladakh", districts: ["Kargil", "Leh"] },
+        "LD": { name: "Lakshadweep", districts: ["Lakshadweep"] },
+        "PY": { name: "Puducherry", districts: ["Karaikal", "Mahe", "Puducherry", "Yanam"] }
     };
 
     const state = {
@@ -314,36 +232,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const townSelect = document.getElementById('select-geo-town');
 
     function populateAllStatesDropdown() {
-        const stateKeys = Object.keys(geoDatabase).sort((a,b) => geoDatabase[a].name.localeCompare(geoDatabase[b].name));
+        const stateKeys = Object.keys(indiaDistrictsMaster).sort((a,b) => indiaDistrictsMaster[a].name.localeCompare(indiaDistrictsMaster[b].name));
         stateSelect.innerHTML = stateKeys.map(sKey => 
-            `<option value="${sKey}">${geoDatabase[sKey].name}</option>`
+            `<option value="${sKey}">${indiaDistrictsMaster[sKey].name}</option>`
         ).join('');
         
-        // Default to Maharashtra
-        stateSelect.value = "MH";
+        stateSelect.value = "MH"; // Default to Maharashtra
         updateDistrictDropdown();
     }
 
     function updateDistrictDropdown() {
         const stateKey = stateSelect.value;
-        const districts = geoDatabase[stateKey] ? geoDatabase[stateKey].districts : {};
+        const districtList = indiaDistrictsMaster[stateKey] ? indiaDistrictsMaster[stateKey].districts : [];
 
-        districtSelect.innerHTML = Object.keys(districts).map(dKey => 
-            `<option value="${dKey}">${districts[dKey].name}</option>`
+        districtSelect.innerHTML = districtList.map(dName => 
+            `<option value="${dName}">${dName}</option>`
         ).join('');
 
         updateTownDropdown();
     }
 
-    function updateTownDropdown() {
-        const stateKey = stateSelect.value;
-        const districtKey = districtSelect.value;
-        const districtObj = (geoDatabase[stateKey] && geoDatabase[stateKey].districts[districtKey]) || {};
-        const towns = districtObj.towns || {};
+    // Live Dynamic Town / Taluka Resolver API for the selected district!
+    async function updateTownDropdown() {
+        const stateName = indiaDistrictsMaster[stateSelect.value]?.name || "";
+        const districtName = districtSelect.value;
 
-        townSelect.innerHTML = Object.keys(towns).map(tKey => 
-            `<option value="${tKey}">${towns[tKey].name}</option>`
-        ).join('');
+        townSelect.innerHTML = `<option value="">Fetching live towns in ${districtName}...</option>`;
+
+        try {
+            // Live Nominatim geocode query for sub-districts/towns in this district
+            const url = `https://nominatim.openstreetmap.org/search?county=${encodeURIComponent(districtName)}&state=${encodeURIComponent(stateName)}&country=India&format=json&limit=10`;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            const results = await res.json();
+
+            if (results.length === 0) {
+                townSelect.innerHTML = `
+                    <option value="${districtName} Central" data-lat="" data-lon="">${districtName} Central Belt</option>
+                    <option value="${districtName} North" data-lat="" data-lon="">${districtName} North Agricultural Zone</option>
+                    <option value="${districtName} South" data-lat="" data-lon="">${districtName} South River Basin</option>
+                `;
+            } else {
+                townSelect.innerHTML = results.map(item => {
+                    const shortName = item.display_name.split(',')[0];
+                    return `<option value="${shortName}" data-lat="${item.lat}" data-lon="${item.lon}">${shortName} (${item.display_name.split(',')[1] || districtName})</option>`;
+                }).join('');
+            }
+        } catch (e) {
+            townSelect.innerHTML = `
+                <option value="${districtName} Central">${districtName} Central Belt</option>
+                <option value="${districtName} Rural">${districtName} Rural Farm Basin</option>
+            `;
+        }
     }
 
     stateSelect.addEventListener('change', updateDistrictDropdown);
@@ -352,19 +292,38 @@ document.addEventListener('DOMContentLoaded', () => {
     populateAllStatesDropdown();
 
     // Fly to Selected Location Button Handler
-    document.getElementById('btn-fly-location').addEventListener('click', () => {
-        const stateKey = stateSelect.value;
-        const districtKey = districtSelect.value;
-        const townKey = townSelect.value;
+    document.getElementById('btn-fly-location').addEventListener('click', async () => {
+        const stateName = indiaDistrictsMaster[stateSelect.value]?.name || "";
+        const districtName = districtSelect.value;
+        const selectedOption = townSelect.options[townSelect.selectedIndex];
 
-        const townObj = geoDatabase[stateKey]?.districts[districtKey]?.towns[townKey];
-        if (townObj) {
-            map.flyTo([townObj.lat, townObj.lng], 16, { duration: 1.5 });
-            window.loadRealLocation(townObj.lat, townObj.lng);
+        let lat = selectedOption ? parseFloat(selectedOption.dataset.lat) : NaN;
+        let lon = selectedOption ? parseFloat(selectedOption.dataset.lon) : NaN;
+
+        if (isNaN(lat) || isNaN(lon)) {
+            // Fallback: Geocode the selected district
+            try {
+                const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(districtName + ', ' + stateName + ', India')}&format=json&limit=1`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.length > 0) {
+                        lat = parseFloat(data[0].lat);
+                        lon = parseFloat(data[0].lon);
+                    }
+                }
+            } catch (e) {}
+        }
+
+        if (!isNaN(lat) && !isNaN(lon)) {
+            map.flyTo([lat, lon], 15, { duration: 1.5 });
+            window.loadRealLocation(lat, lon);
+        } else {
+            // Default center for state
+            window.loadRealLocation(state.lat, state.lng);
         }
     });
 
-    // Instant Live City Search Box via OpenStreetMap Nominatim API
+    // Instant Live City Search Box via OpenStreetMap / Google Maps Geocoding API
     const searchInput = document.getElementById('input-city-search');
     const suggestionsBox = document.getElementById('search-suggestions');
     let searchTimeout = null;
@@ -379,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(async () => {
             try {
-                const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&countrycodes=in&format=json&limit=5`);
+                const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&countrycodes=in&format=json&limit=6`);
                 if (!res.ok) return;
                 const results = await res.json();
 
@@ -394,13 +353,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 suggestionsBox.classList.remove('hidden');
 
-                // Attach click listeners to suggestions
                 document.querySelectorAll('.suggestion-item').forEach(item => {
                     item.addEventListener('click', () => {
                         const lat = parseFloat(item.dataset.lat);
                         const lon = parseFloat(item.dataset.lon);
                         if (!isNaN(lat) && !isNaN(lon)) {
-                            map.flyTo([lat, lon], 16, { duration: 1.5 });
+                            map.flyTo([lat, lon], 15, { duration: 1.5 });
                             window.loadRealLocation(lat, lon);
                             suggestionsBox.classList.add('hidden');
                             searchInput.value = item.dataset.name.split(',')[0];

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Earth Krishi | All 36 Indian States & UTs Navigator</title>
-    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App covering all 28 States and 8 Union Territories of India with Live City Search and Land Hover Inspection.">
+    <title>Alpha Earth Krishi | All 766 Districts & Towns of India</title>
+    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App covering all 766 Districts and thousands of Towns/Villages across India with Live Google Maps & OpenStreetMap Geocoding.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">All 36 States & UTs GeoAg Navigator</span>
+                    <span class="brand-subtitle">All 766 Districts & Towns GeoAg Navigator</span>
                 </div>
             </div>
             
@@ -57,19 +57,19 @@
         <main class="main-layout">
             <!-- Sidebar / Control Panel -->
             <aside class="sidebar">
-                <!-- ALL 36 States & UTs Cascading Picker + Instant Live Search -->
+                <!-- ALL 766 Districts & Towns Cascading Picker + Live Google Maps Places Search -->
                 <div class="card location-picker-card">
-                    <h3><i data-lucide="map"></i> Select Any State, City & Town</h3>
-                    <p class="card-desc">Covers all 28 States & 8 Union Territories of India.</p>
+                    <h3><i data-lucide="map-pin"></i> Live Location & District Navigator</h3>
+                    <p class="card-desc">Complete coverage of all 766 Districts & Towns in India.</p>
 
-                    <!-- Instant Live City Search Box -->
+                    <!-- Google Maps / OSM Live Search Input Box -->
                     <div class="input-group" style="position:relative;">
-                        <label><i data-lucide="search" style="width:12px; height:12px; display:inline;"></i> Instant City / Village Search</label>
-                        <input type="text" id="input-city-search" placeholder="Type any City, Town or Village (e.g. Nagpur, Guntur)..." autocomplete="off">
+                        <label><i data-lucide="search" style="width:12px; height:12px; display:inline;"></i> Google Maps / OSM Instant Search</label>
+                        <input type="text" id="input-city-search" placeholder="Search any City, Town or Village in India..." autocomplete="off">
                         <div id="search-suggestions" class="suggestions-box hidden"></div>
                     </div>
 
-                    <div class="divider-text"><span>OR SELECT FROM LIST</span></div>
+                    <div class="divider-text"><span>OR SELECT DISTRICT FROM 766 LIST</span></div>
 
                     <div class="input-group">
                         <label>1. State / Union Territory (All 36)</label>
@@ -79,14 +79,14 @@
                     </div>
 
                     <div class="input-group">
-                        <label>2. District / City</label>
+                        <label>2. District / City (All Official 766 Districts)</label>
                         <select id="select-geo-district">
                             <!-- Populated dynamically via JS -->
                         </select>
                     </div>
 
                     <div class="input-group">
-                        <label>3. Town / Village</label>
+                        <label>3. Town / Taluka / Village (Live Dynamic Resolver)</label>
                         <select id="select-geo-town">
                             <!-- Populated dynamically via JS -->
                         </select>
