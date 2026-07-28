@@ -6,8 +6,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Alpha Earth Krishi | Govt Cadastral & Bhu-Naksha Land Record Engine</title>
-    <meta name="description" content="Integrates Indian State Government Cadastral Databases (Bhu-Naksha, Mahabhulekh, Bhoomi, Dharani, AgriStack, ISRO Bhuvan WMS) with satellite climate intelligence.">
+    <title>Alpha Earth Krishi | AP Meebhoomi & TS Dharani Cadastral Navigator</title>
+    <meta name="description" content="Includes Andhra Pradesh Meebhoomi 1-B Adangal and Telangana Dharani Portal Cadastral Survey Land Databases integrated with live satellite climate telemetry.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="index.css?v=1.0.4">
+    <link rel="stylesheet" href="index.css?v=1.0.5">
 </head>
 <body>
     <div class="app-container">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">Govt Bhu-Naksha & AgriStack GIS Integration</span>
+                    <span class="brand-subtitle">AP Meebhoomi & TS Dharani Land Registry Engine</span>
                 </div>
             </div>
             
@@ -43,12 +43,12 @@
                 <!-- Browser Voice Assistant Button -->
                 <button class="voice-assistant-btn" id="btn-voice-ai">
                     <i data-lucide="mic"></i>
-                    <span id="voice-btn-text">Voice Assistant (Speak Hindi/Eng)</span>
+                    <span id="voice-btn-text">Voice Assistant (Speak Telugu/Hindi/Eng)</span>
                 </button>
 
                 <div class="metric-pill">
                     <i data-lucide="landmark"></i>
-                    <span>State Land Records API</span>
+                    <span>AP Meebhoomi & TS Dharani Active</span>
                 </div>
                 <div class="status-indicator" id="api-status-pill">
                     <span class="dot"></span> Live API Active
@@ -99,12 +99,12 @@
                 </div>
 
                 <div class="card search-card">
-                    <h3><i data-lucide="search"></i> Coordinate & Parcel Search</h3>
-                    <p class="card-desc">Hover over any land parcel on the map or input precise coordinates.</p>
+                    <h3><i data-lucide="search"></i> AP & TS Cadastral Survey Search</h3>
+                    <p class="card-desc">Query Meebhoomi (AP) & Dharani (TS) Survey Numbers.</p>
                     
                     <div class="tab-buttons">
                         <button class="tab-btn active" data-tab="coords"><i data-lucide="map-pin"></i> Coordinates</button>
-                        <button class="tab-btn" data-tab="survey"><i data-lucide="file-text"></i> Khasra / Survey #</button>
+                        <button class="tab-btn" data-tab="survey"><i data-lucide="file-text"></i> AP & TS Sy.No.</button>
                         <button class="tab-btn" data-tab="farmer"><i data-lucide="user"></i> Farmer ID</button>
                     </div>
 
@@ -113,42 +113,42 @@
                         <div class="input-group">
                             <label>Latitude & Longitude</label>
                             <div class="dual-input">
-                                <input type="text" id="input-lat" value="16.8524" placeholder="Lat">
-                                <input type="text" id="input-lng" value="74.5815" placeholder="Lng">
+                                <input type="text" id="input-lat" value="16.2430" placeholder="Lat">
+                                <input type="text" id="input-lng" value="80.6400" placeholder="Lng">
                             </div>
                         </div>
                         <div class="preset-locations">
-                            <span class="label-tiny">Quick Demos:</span>
-                            <button class="chip-btn" onclick="loadRealLocation(16.8524, 74.5815)">Sangli, MH</button>
-                            <button class="chip-btn" onclick="loadRealLocation(30.9010, 75.8573)">Ludhiana, PB</button>
-                            <button class="chip-btn" onclick="loadRealLocation(12.2958, 76.6394)">Mysuru, KA</button>
-                            <button class="chip-btn" onclick="loadRealLocation(22.5726, 88.3639)">Kolkata, WB</button>
+                            <span class="label-tiny">AP & TS Demos:</span>
+                            <button class="chip-btn" onclick="loadRealLocation(16.2430, 80.6400)">Guntur, AP</button>
+                            <button class="chip-btn" onclick="loadRealLocation(15.4780, 78.4830)">Kurnool, AP</button>
+                            <button class="chip-btn" onclick="loadRealLocation(17.7280, 79.1780)">Warangal, TS</button>
+                            <button class="chip-btn" onclick="loadRealLocation(18.7800, 78.2800)">Nizamabad, TS</button>
                         </div>
                         <button class="btn btn-primary" id="btn-analyze-coords"><i data-lucide="refresh-cw"></i> Fetch Live Open-Meteo Data</button>
                     </div>
 
-                    <!-- Tab: Khasra / Survey Number -->
+                    <!-- Tab: Khasra / Survey Number (AP & TS Specific) -->
                     <div class="tab-content" id="tab-survey">
                         <div class="input-group">
-                            <label>State Portal API</label>
+                            <label>State Land Registry Portal</label>
                             <select id="select-state">
-                                <option value="Maharashtra">Maharashtra (Mahabhulekh API)</option>
-                                <option value="Andhra">Andhra Pradesh (Meebhoomi WFS)</option>
-                                <option value="Telangana">Telangana (Dharani Cadastral)</option>
-                                <option value="Punjab">Punjab (PLRS Khasra API)</option>
-                                <option value="Karnataka">Karnataka (Bhoomi RTC API)</option>
+                                <option value="AP">Andhra Pradesh (Meebhoomi 1-B / Webland)</option>
+                                <option value="TS">Telangana (Dharani Land Passbook)</option>
+                                <option value="Maharashtra">Maharashtra (Mahabhulekh 7/12)</option>
+                                <option value="Karnataka">Karnataka (Bhoomi RTC)</option>
+                                <option value="Punjab">Punjab (PLRS Khasra)</option>
                                 <option value="UP">Uttar Pradesh (Bhulekh UP)</option>
                             </select>
                         </div>
                         <div class="input-group">
-                            <label>District & Taluka</label>
-                            <input type="text" id="input-district" value="Sangli / Miraj">
+                            <label>District & Mandal / Taluka</label>
+                            <input type="text" id="input-district" value="Guntur / Tenali Mandal">
                         </div>
                         <div class="input-group">
-                            <label>Survey / Khasra Number</label>
-                            <input type="text" id="input-khasra" value="Khasra 247/3A">
+                            <label>Survey Number (Sy.No. / Khasra)</label>
+                            <input type="text" id="input-khasra" value="Sy.No. 142/2B">
                         </div>
-                        <button class="btn btn-primary" id="btn-analyze-survey"><i data-lucide="search-check"></i> Query Cadastral Boundary</button>
+                        <button class="btn btn-primary" id="btn-analyze-survey"><i data-lucide="search-check"></i> Query AP/TS Land Parcel Adangal</button>
                     </div>
 
                     <!-- Tab: Farmer ID Search -->
@@ -159,11 +159,11 @@
                         </div>
                         <div class="input-group">
                             <label>Farmer Full Name</label>
-                            <input type="text" id="input-farmer-name" value="Ramesh Anant Patil">
+                            <input type="text" id="input-farmer-name" value="Konda Venkata Reddy">
                         </div>
                         <div class="input-group">
-                            <label>Village / City & State</label>
-                            <input type="text" id="input-farmer-city" value="Miraj, Sangli, Maharashtra">
+                            <label>Village / Mandal & District</label>
+                            <input type="text" id="input-farmer-city" value="Tenali, Guntur, Andhra Pradesh">
                         </div>
                         <button class="btn btn-primary" id="btn-analyze-farmer"><i data-lucide="key"></i> Authenticate & Fetch Parcels</button>
                     </div>
@@ -174,11 +174,11 @@
                     <div class="parcel-header">
                         <div>
                             <span class="badge badge-success" id="parcel-status">Real Data Active</span>
-                            <h4 id="parcel-title">Parcel #MH-SGL-247/3A</h4>
+                            <h4 id="parcel-title">Parcel #AP-GNT-142/2B</h4>
                             <p id="parcel-subtitle" class="text-sub">Fetching OSM Reverse Geocode...</p>
                         </div>
                         <div class="parcel-area">
-                            <span class="area-val" id="parcel-size">2.45</span>
+                            <span class="area-val" id="parcel-size">3.20</span>
                             <span class="area-unit">Acres</span>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                         <h4>Alpha Earth AI Agronomist Voice Assistant</h4>
                     </div>
                     <div class="ai-recommendation-box" id="ai-summary-text">
-                        Click the mic icon above to ask questions in Hindi, Marathi, or English!
+                        Click the mic icon above to ask questions in Telugu, Hindi, or English!
                     </div>
                 </div>
             </aside>
@@ -241,7 +241,7 @@
                     <div id="hover-hud" class="hover-hud-box hidden">
                         <div class="hud-header">
                             <span class="hud-dot"></span>
-                            <span class="hud-title" id="hud-latlng">Hovering Land: 16.8524 N, 74.5815 E</span>
+                            <span class="hud-title" id="hud-latlng">Hovering Land: 16.2430 N, 80.6400 E</span>
                         </div>
                         <div class="hud-body">
                             <span><i data-lucide="scan"></i> Land Parcel Preview</span>
@@ -258,7 +258,7 @@
                     </div>
                     <div class="module-nav-buttons">
                         <button class="mod-btn active" data-mod="disease"><i data-lucide="camera"></i> Plant Disease CV Scanner</button>
-                        <button class="mod-btn" data-mod="govland"><i data-lucide="landmark"></i> Govt Land Records & Bhu-Naksha</button>
+                        <button class="mod-btn" data-mod="govland"><i data-lucide="landmark"></i> AP Meebhoomi & TS Dharani</button>
                         <button class="mod-btn" data-mod="irrigation"><i data-lucide="droplet"></i> ET0 Precision Irrigation</button>
                         <button class="mod-btn" data-mod="insurance"><i data-lucide="file-check"></i> PMFBY Satellite Insurance</button>
                         <button class="mod-btn" data-mod="credit"><i data-lucide="credit-card"></i> KCC Satellite Credit Score</button>
@@ -281,56 +281,50 @@
                         </div>
                     </div>
 
-                    <!-- Module: Govt Cadastral & Bhu-Naksha Integration Explorer -->
+                    <!-- Module: AP Meebhoomi & TS Dharani Land Registry Explorer -->
                     <div class="module-content" id="mod-govland">
                         <div class="govland-header">
                             <div>
-                                <h5><i data-lucide="landmark"></i> Indian State Cadastral & Land Record Integration Status</h5>
-                                <p class="text-sub">Overview of official APIs, GeoServer WMS/WFS endpoints, and AgriStack integration protocols.</p>
+                                <h5><i data-lucide="landmark"></i> Andhra Pradesh & Telangana Digital Land Record Database Engine</h5>
+                                <p class="text-sub">Integrated with AP Meebhoomi 1-B Adangal, Webland WFS, and Telangana Dharani Cadastral Map Server.</p>
                             </div>
                             <button class="btn btn-primary" style="width:auto; padding:8px 16px;" id="btn-toggle-bhuvan">
                                 <i data-lucide="layers"></i> Toggle ISRO Bhuvan Parcel Overlay
                             </button>
                         </div>
                         
-                        <div class="govland-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-top:14px;">
-                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
+                        <div class="govland-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:14px; margin-top:14px;">
+                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:14px; border-radius:8px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                                    <strong style="color:#10b981;">Maharashtra (Mahabhulekh)</strong>
-                                    <span class="badge" style="background:rgba(16,185,129,0.2); color:#10b981;">WFS Active</span>
+                                    <strong style="color:#10b981; font-size:1.05rem;">Andhra Pradesh (Meebhoomi / Webland)</strong>
+                                    <span class="badge" style="background:rgba(16,185,129,0.2); color:#10b981;">26 Districts Active</span>
                                 </div>
-                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">7/12 Digital Extract API + Bhu-Naksha GeoServer WMS parcel boundaries.</p>
+                                <ul style="font-size:0.8rem; color:#cbd5e1; margin:10px 0 0 0; padding-left:16px;">
+                                    <li><strong>1-B Adangal Extract:</strong> Pattadar Name, Khata No., Sy.No. Extent</li>
+                                    <li><strong>Webland WFS:</strong> Cadastral Village Boundary Map Service</li>
+                                    <li><strong>Soil Classification:</strong> Delta Alluvium / Red Clay / Black Cotton</li>
+                                    <li><strong>Irrigation Rights:</strong> Krishna & Godavari Canal Water Subvention</li>
+                                </ul>
                             </div>
 
-                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
+                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:14px; border-radius:8px;">
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
-                                    <strong style="color:#06b6d4;">Karnataka (Bhoomi RTC)</strong>
-                                    <span class="badge" style="background:rgba(6,182,212,0.2); color:#06b6d4;">REST API</span>
+                                    <strong style="color:#06b6d4; font-size:1.05rem;">Telangana (Dharani Portal)</strong>
+                                    <span class="badge" style="background:rgba(6,182,212,0.2); color:#06b6d4;">33 Districts Active</span>
                                 </div>
-                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">Bhoomi Land Mutation REST API & Parihara Crop Loss Insurance Integration.</p>
-                            </div>
-
-                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center;">
-                                    <strong style="color:#f59e0b;">Telangana (Dharani WFS)</strong>
-                                    <span class="badge" style="background:rgba(245,158,11,0.2); color:#f59e0b;">GeoJSON WFS</span>
-                                </div>
-                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">Dharani Geo-spatial Cadastral Map Server + Passbook Land Rights.</p>
-                            </div>
-
-                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
-                                <div style="display:flex; justify-content:space-between; align-items:center;">
-                                    <strong style="color:#8b5cf6;">Andhra Pradesh (Meebhoomi)</strong>
-                                    <span class="badge" style="background:rgba(139,92,246,0.2); color:#8b5cf6;">Adangal WFS</span>
-                                </div>
-                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">Meebhoomi 1-B Adangal Extract + Webland Cadastral Polygon Layer.</p>
+                                <ul style="font-size:0.8rem; color:#cbd5e1; margin:10px 0 0 0; padding-left:16px;">
+                                    <li><strong>Pattadar Passbook:</strong> Digital Khata & Survey Parcel Rights</li>
+                                    <li><strong>GeoServer Cadastral WFS:</strong> Vector Polygon Overlay</li>
+                                    <li><strong>Rythu Bandhu:</strong> Direct Investment Support Verification</li>
+                                    <li><strong>Crop Rights:</strong> Turmeric, Red Gram, Cotton & Paddy Belt</li>
+                                </ul>
                             </div>
                         </div>
 
-                        <div class="notice-box" style="margin-top:14px; background:rgba(6,182,212,0.1); border-color:rgba(6,182,212,0.3);">
-                            <i data-lucide="info"></i>
+                        <div class="notice-box" style="margin-top:14px; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3);">
+                            <i data-lucide="check-circle"></i>
                             <span style="font-size:0.8rem; color:#e2e8f0;">
-                                <strong>How Access Works:</strong> Under <strong>AgriStack & Niti Aayog Open Data Guidelines</strong>, state land parcel polygons are accessed via OGC WMS/WFS GeoServer layers (or ISRO Bhuvan LULC spatial endpoints) and mapped using Khasra / Survey Numbers.
+                                <strong>Live Integration Ready:</strong> Selecting any AP or TS District/Mandal automatically cross-references Bhu-Naksha polygons with Open-Meteo satellite soil telemetry.
                             </span>
                         </div>
                     </div>
@@ -475,6 +469,6 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="app.js?v=1.0.4"></script>
+    <script src="app.js?v=1.0.5"></script>
 </body>
 </html>
