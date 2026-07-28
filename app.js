@@ -83,24 +83,40 @@ document.addEventListener('DOMContentLoaded', () => {
         zIndex: 501
     }).addTo(map);
 
+    // ISRO Bhuvan Cadastral Spatial WMS Layer Overlay
+    const bhuvanLayer = L.tileLayer.wms('https://bhuvan-vec1.nrsc.gov.in/bhuvan/gwc/service/wms', {
+        layers: 'india3',
+        format: 'image/png',
+        transparent: true,
+        attribution: 'ISRO Bhuvan NRSC Spatial Services',
+        maxZoom: 19,
+        zIndex: 450
+    });
+
     function setMapLayerMode(layerMode) {
         state.layer = layerMode;
         if (layerMode === 'hybrid') {
+            if (map.hasLayer(bhuvanLayer)) map.removeLayer(bhuvanLayer);
             if (!map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
             if (!map.hasLayer(roadsLayer)) map.addLayer(roadsLayer);
             if (state.polygon) state.polygon.setStyle({ color: '#10b981', fillColor: '#10b981', fillOpacity: 0.25, weight: 3 });
+        } else if (layerMode === 'bhuvan') {
+            if (!map.hasLayer(bhuvanLayer)) map.addLayer(bhuvanLayer);
+            if (!map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
+            if (state.polygon) state.polygon.setStyle({ color: '#f59e0b', fillColor: '#f59e0b', fillOpacity: 0.15, weight: 3 });
         } else if (layerMode === 'rgb') {
+            if (map.hasLayer(bhuvanLayer)) map.removeLayer(bhuvanLayer);
             if (map.hasLayer(labelsLayer)) map.removeLayer(labelsLayer);
             if (map.hasLayer(roadsLayer)) map.removeLayer(roadsLayer);
             if (state.polygon) state.polygon.setStyle({ color: '#10b981', fillColor: '#10b981', fillOpacity: 0.25, weight: 3 });
         } else if (layerMode === 'ndvi') {
-            if (map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
+            if (!map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
             if (state.polygon) state.polygon.setStyle({ color: '#22c55e', fillColor: '#22c55e', fillOpacity: 0.6 });
         } else if (layerMode === 'moisture') {
-            if (map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
+            if (!map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
             if (state.polygon) state.polygon.setStyle({ color: '#06b6d4', fillColor: '#06b6d4', fillOpacity: 0.6 });
         } else if (layerMode === 'cadastral') {
-            if (map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
+            if (!map.hasLayer(labelsLayer)) map.addLayer(labelsLayer);
             if (state.polygon) state.polygon.setStyle({ color: '#f59e0b', fillColor: '#f59e0b', fillOpacity: 0.1, weight: 4 });
         }
     }
@@ -113,6 +129,19 @@ document.addEventListener('DOMContentLoaded', () => {
             setMapLayerMode(btn.dataset.layer);
         });
     });
+
+    const toggleBhuvanBtn = document.getElementById('btn-toggle-bhuvan');
+    if (toggleBhuvanBtn) {
+        toggleBhuvanBtn.addEventListener('click', () => {
+            if (map.hasLayer(bhuvanLayer)) {
+                map.removeLayer(bhuvanLayer);
+                alert("ISRO Bhuvan Cadastral Parcel Overlay toggled OFF.");
+            } else {
+                map.addLayer(bhuvanLayer);
+                alert("ISRO Bhuvan Cadastral Parcel Overlay toggled ON. (NRSC Spatial Layer Active)");
+            }
+        });
+    }
 
     function drawParcelPolygon(lat, lng) {
         if (state.polygon) map.removeLayer(state.polygon);

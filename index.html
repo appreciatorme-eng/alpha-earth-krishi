@@ -6,8 +6,8 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Alpha Earth Krishi | Instant Dynamic GeoAg Navigator</title>
-    <meta name="description" content="100% Free, Browser-Native Agricultural Intelligence Super-App with Hybrid Satellite Imagery, Real-Time Landmark Labels, Road/Village Names, and 766 Indian District Navigation.">
+    <title>Alpha Earth Krishi | Govt Cadastral & Bhu-Naksha Land Record Engine</title>
+    <meta name="description" content="Integrates Indian State Government Cadastral Databases (Bhu-Naksha, Mahabhulekh, Bhoomi, Dharani, AgriStack, ISRO Bhuvan WMS) with satellite climate intelligence.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="index.css?v=1.0.3">
+    <link rel="stylesheet" href="index.css?v=1.0.4">
 </head>
 <body>
     <div class="app-container">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="logo-text">
                     <span class="brand-title">ALPHA EARTH <span class="badge-krishi">KRISHI</span></span>
-                    <span class="brand-subtitle">Instant Auto-Updating GeoAg Navigator</span>
+                    <span class="brand-subtitle">Govt Bhu-Naksha & AgriStack GIS Integration</span>
                 </div>
             </div>
             
@@ -47,8 +47,8 @@
                 </button>
 
                 <div class="metric-pill">
-                    <i data-lucide="zap"></i>
-                    <span>Instant Live Updates Active</span>
+                    <i data-lucide="landmark"></i>
+                    <span>State Land Records API</span>
                 </div>
                 <div class="status-indicator" id="api-status-pill">
                     <span class="dot"></span> Live API Active
@@ -133,9 +133,11 @@
                             <label>State Portal API</label>
                             <select id="select-state">
                                 <option value="Maharashtra">Maharashtra (Mahabhulekh API)</option>
+                                <option value="Andhra">Andhra Pradesh (Meebhoomi WFS)</option>
+                                <option value="Telangana">Telangana (Dharani Cadastral)</option>
                                 <option value="Punjab">Punjab (PLRS Khasra API)</option>
                                 <option value="Karnataka">Karnataka (Bhoomi RTC API)</option>
-                                <option value="Telangana">Telangana (Dharani WFS)</option>
+                                <option value="UP">Uttar Pradesh (Bhulekh UP)</option>
                             </select>
                         </div>
                         <div class="input-group">
@@ -221,10 +223,11 @@
                         <div class="layer-selector">
                             <span class="toolbar-title"><i data-lucide="layers"></i> Map Layers:</span>
                             <button class="layer-btn active" data-layer="hybrid"><i data-lucide="tag" style="width:12px; height:12px; display:inline;"></i> Hybrid (Satellite + Landmarks)</button>
+                            <button class="layer-btn" data-layer="bhuvan"><i data-lucide="map" style="width:12px; height:12px; display:inline;"></i> ISRO Bhuvan Cadastral WMS</button>
                             <button class="layer-btn" data-layer="rgb">Pure Satellite (RGB)</button>
                             <button class="layer-btn" data-layer="ndvi">NDVI (Crop Health)</button>
                             <button class="layer-btn" data-layer="moisture">Soil Moisture (NDWI)</button>
-                            <button class="layer-btn" data-layer="cadastral">Cadastral Grid</button>
+                            <button class="layer-btn" data-layer="cadastral">Cadastral Survey Grid</button>
                         </div>
                         <div class="time-slider-container">
                             <label><i data-lucide="clock"></i> Timeline: <span id="time-year-display">2026 (Live API)</span></label>
@@ -255,6 +258,7 @@
                     </div>
                     <div class="module-nav-buttons">
                         <button class="mod-btn active" data-mod="disease"><i data-lucide="camera"></i> Plant Disease CV Scanner</button>
+                        <button class="mod-btn" data-mod="govland"><i data-lucide="landmark"></i> Govt Land Records & Bhu-Naksha</button>
                         <button class="mod-btn" data-mod="irrigation"><i data-lucide="droplet"></i> ET0 Precision Irrigation</button>
                         <button class="mod-btn" data-mod="insurance"><i data-lucide="file-check"></i> PMFBY Satellite Insurance</button>
                         <button class="mod-btn" data-mod="credit"><i data-lucide="credit-card"></i> KCC Satellite Credit Score</button>
@@ -274,6 +278,60 @@
                                 <h5><i data-lucide="activity"></i> Disease Scan Diagnosis Result</h5>
                                 <div class="disease-placeholder">Upload a photo above to scan leaf for fungal, bacterial, or pest damage.</div>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Module: Govt Cadastral & Bhu-Naksha Integration Explorer -->
+                    <div class="module-content" id="mod-govland">
+                        <div class="govland-header">
+                            <div>
+                                <h5><i data-lucide="landmark"></i> Indian State Cadastral & Land Record Integration Status</h5>
+                                <p class="text-sub">Overview of official APIs, GeoServer WMS/WFS endpoints, and AgriStack integration protocols.</p>
+                            </div>
+                            <button class="btn btn-primary" style="width:auto; padding:8px 16px;" id="btn-toggle-bhuvan">
+                                <i data-lucide="layers"></i> Toggle ISRO Bhuvan Parcel Overlay
+                            </button>
+                        </div>
+                        
+                        <div class="govland-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-top:14px;">
+                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <strong style="color:#10b981;">Maharashtra (Mahabhulekh)</strong>
+                                    <span class="badge" style="background:rgba(16,185,129,0.2); color:#10b981;">WFS Active</span>
+                                </div>
+                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">7/12 Digital Extract API + Bhu-Naksha GeoServer WMS parcel boundaries.</p>
+                            </div>
+
+                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <strong style="color:#06b6d4;">Karnataka (Bhoomi RTC)</strong>
+                                    <span class="badge" style="background:rgba(6,182,212,0.2); color:#06b6d4;">REST API</span>
+                                </div>
+                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">Bhoomi Land Mutation REST API & Parihara Crop Loss Insurance Integration.</p>
+                            </div>
+
+                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <strong style="color:#f59e0b;">Telangana (Dharani WFS)</strong>
+                                    <span class="badge" style="background:rgba(245,158,11,0.2); color:#f59e0b;">GeoJSON WFS</span>
+                                </div>
+                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">Dharani Geo-spatial Cadastral Map Server + Passbook Land Rights.</p>
+                            </div>
+
+                            <div class="govland-card" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:12px; border-radius:8px;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <strong style="color:#8b5cf6;">Andhra Pradesh (Meebhoomi)</strong>
+                                    <span class="badge" style="background:rgba(139,92,246,0.2); color:#8b5cf6;">Adangal WFS</span>
+                                </div>
+                                <p style="font-size:0.78rem; color:#94a3b8; margin:6px 0 0 0;">Meebhoomi 1-B Adangal Extract + Webland Cadastral Polygon Layer.</p>
+                            </div>
+                        </div>
+
+                        <div class="notice-box" style="margin-top:14px; background:rgba(6,182,212,0.1); border-color:rgba(6,182,212,0.3);">
+                            <i data-lucide="info"></i>
+                            <span style="font-size:0.8rem; color:#e2e8f0;">
+                                <strong>How Access Works:</strong> Under <strong>AgriStack & Niti Aayog Open Data Guidelines</strong>, state land parcel polygons are accessed via OGC WMS/WFS GeoServer layers (or ISRO Bhuvan LULC spatial endpoints) and mapped using Khasra / Survey Numbers.
+                            </span>
                         </div>
                     </div>
 
@@ -417,6 +475,6 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="app.js?v=1.0.3"></script>
+    <script src="app.js?v=1.0.4"></script>
 </body>
 </html>
